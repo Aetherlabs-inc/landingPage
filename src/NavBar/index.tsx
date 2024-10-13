@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef, useState } from "react";
-import { FaTimes, FaBars } from "react-icons/fa";
+import { Menu, Minimize } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/themeSwitcher";
 
@@ -98,7 +98,7 @@ const Navbar = (props: Props) => {
                         className="z-50 inline-flex items-center p-2 w-10 h-10 justify-center rounded-lg md:hidden"
                         aria-controls="navbar" aria-expanded={nav ? "true" : "false"}
                     >
-                        {nav ? <FaTimes size={24} /> : <FaBars size={24} />}
+                        {nav ? <Minimize size={24} /> : <Menu size={24} />}
                         <span className="sr-only">Open main menu</span>
                     </button>
 
