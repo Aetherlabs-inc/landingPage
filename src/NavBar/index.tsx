@@ -60,23 +60,23 @@ const Navbar = (props: Props) => {
         },
         {
             name: "About",
-            path: "/about",
+            path: "/",
         },
         {
             name: "Contact",
-            path: "/contact",
+            path: "/",
         },
         {
             name: "Blog",
-            path: "/blog",
+            path: "/",
         },
         {
             name: "More",
             path: "",
             items: [
-                { name: "Shop", path: "/shop" },
-                { name: "Events", path: "/events" },
-                { name: "Services", path: "/services" },
+                { name: "Shop", path: "/" },
+                { name: "Events", path: "/" },
+                { name: "Services", path: "/" },
             ],
         }
     ];
@@ -88,7 +88,7 @@ const Navbar = (props: Props) => {
                     {/* Logo */}
                     <div>
                         <Link href="/" className="font-bold text-2xl">
-                            Your Startup
+                            Startup
                         </Link>
                     </div>
 
