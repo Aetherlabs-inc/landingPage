@@ -3,6 +3,8 @@ import Hero from './Hero'
 import Features from './Features'
 import AboutConcept from './AboutConcept'
 import HowItWorks from './HowItWorks'
+import Testimonials from './Testimonials'
+import FinalCTA from './FinalCTA'
 
 type Props = {}
 
@@ -13,6 +15,8 @@ const LandingPage = (props: Props) => {
       <AboutConcept />
       <HowItWorks />
       <Features />
+      <Testimonials />
+      <FinalCTA />
 
     </div>
   )
