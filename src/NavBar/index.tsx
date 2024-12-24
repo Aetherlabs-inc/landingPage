@@ -75,9 +75,7 @@ const Navbar = (props: Props) => {
             name: "More",
             path: "",
             items: [
-                { name: "Shop", path: "/" },
-                { name: "Events", path: "/" },
-                { name: "Services", path: "/" },
+                { name: "survey", path: "/survey" },
             ],
         }
     ];
