@@ -61,7 +61,7 @@ const Navbar = (props: Props) => {
         },
         {
             name: "About",
-            path: "/",
+            path: "/about",
         },
         {
             name: "Contact",
