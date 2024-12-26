@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import EnhancedBinaryBackground from '@/components/EnchancedBinaryBackground';
 
 const Hero = () => {
     return (
@@ -40,7 +41,7 @@ const Hero = () => {
                 {/* Mockup Image */}
                 <div className="mt-5">
                     <Image
-                        src="/hero.png" // Replace with your image source
+                        src="/aetherheroo.webp" // Replace with your image source
                         alt="App Screenshot"
                         width={400}
                         height={800}
@@ -57,6 +58,7 @@ const Hero = () => {
                     <p className="text-gray-400">Rated Highly by <strong>10k+</strong> Artists and Collectors</p>
                 </div>
             </div>
+            {/* <EnhancedBinaryBackground /> */}
         </section>
     );
 };

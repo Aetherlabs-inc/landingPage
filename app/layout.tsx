@@ -5,7 +5,7 @@ import Provider from "@/components/provider";
 
 
 export const metadata: Metadata = {
-    title: "ArtAuthentic",
+    title: "Aether",
     description: "Bringing Authenticity to Creativity",
 };
 
