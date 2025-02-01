@@ -1,16 +1,17 @@
 'use client';
 import React from 'react';
 import { signOut } from 'aws-amplify/auth';
-
+import { useRouter } from "next/navigation";
 
 const Dashboard: React.FC = () => {
 
-
+    const router = useRouter();
     const handleSignOut = async () => {
         try {
             await signOut();
             console.log('Signed out');
-            
+            router.push("/");
+
         } catch (error: unknown) {
             console.error('Error signing out', error);
         }

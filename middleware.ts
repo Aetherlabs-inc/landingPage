@@ -26,7 +26,6 @@ export async function middleware(request: NextRequest) {
     // Redirect to dashboard if authenticated
     if (authenticated) {
         if (
-            request.nextUrl.pathname === "/" ||
             request.nextUrl.pathname === "/login" ||
             request.nextUrl.pathname === "/signup"
         ) {
