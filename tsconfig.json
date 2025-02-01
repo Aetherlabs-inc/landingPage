@@ -19,7 +19,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@/data-schema": ["../aether-backend/amplify/data/resource"]
+      // "@/data-schema": ["../aether-backend/amplify/data/resource"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/particleSystem.jsx"],

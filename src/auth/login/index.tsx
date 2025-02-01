@@ -29,7 +29,7 @@ const LoginPage = () => {
             const { isSignedIn, nextStep } = await signIn({ username: email, password });
 
             if (isSignedIn) {
-                router.push("/dashboard");
+                router.push("/");
             } else {
                 console.log('next step', nextStep);
             }
