@@ -1,18 +1,21 @@
-'use client'
-
-import React from 'react';
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+'use client';
+import React, { useState } from "react"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
 import { signIn } from 'aws-amplify/auth';
-import Link from "next/link";
-import { useState } from "react";
+import { Label } from "@/components/ui/label";
 import { BsEyeSlashFill, BsFillEyeFill } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import LoadingScreen from "@/components/LoadingScreen";
-import { Checkbox } from '@/components/ui/checkbox';
+import Image from "next/image";
+export function LoginForm({
+    className,
+    ...props
+}: React.ComponentProps<"div">) {
 
-const LoginPage = () => {
+
     const router = useRouter();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -70,79 +73,114 @@ const LoginPage = () => {
         return (
             <LoadingScreen />
         );
-    }
-
-    return (
-        <div className="flex flex-col items-center justify-center w-full h-screen rounded-full">
-
-            <Card className="p-6 md:w-96 flex flex-col justify-center items-center">
-                <div className='flex flex-col items-center mb-8'>
-                    <h1 className="text-4xl font-bold mb-4">Welcome back!</h1>
-                    <p className="text-lg">Login to your account</p>
-                </div>
-
-                {/* Display error message */}
-                {error && <p className="text-red-500 mb-4">{error}</p>}
-
-                <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="mb-4 h-12 rounded-xl"
-                />
-                <div className="relative w-full flex items-center">
-                    <Input
-                        type={isVisible ? "text" : "password"}
-                        placeholder="Enter your password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="w-full h-12 rounded-xl pr-12" // Ensure there is padding to not overlap the icon
-                    />
-                    <button
-                        onClick={toggleVisibility}
-                        className="absolute right-0 inset-y-0 h-12 w-12 flex items-center justify-center rounded-xl"
-                        aria-label="Toggle password visibility"  // Accessibility improvement
-                    >
-                        {isVisible ? <BsFillEyeFill /> : <BsEyeSlashFill />}
-                    </button>
-                </div>
-                <div className='flex items-end justify-between w-full'>
-                    <div className="flex items-center space-x-2">
-                        <Checkbox id="terms" />
-                        <label
-                            htmlFor="terms"
-                            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                        >
-                            Accept terms and conditions
-                        </label>
+    } return (
+        <div className={cn("flex flex-col gap-6", className)} {...props}>
+            <Card className="overflow-hidden">
+                <CardContent className="grid p-0 md:grid-cols-2">
+                    <div className="relative hidden bg-muted md:block">
+                        <Image
+                            src="/aetherhero1.png"
+                            alt="Image"
+                            className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+                            width={500}
+                            height={500}
+                        />
                     </div>
+                    <form className="p-6 md:p-8">
+                        <div className="flex flex-col gap-6">
+                            <div className="flex flex-col items-center text-center">
+                                <h1 className="text-2xl font-bold">Welcome back</h1>
+                                <p className="text-balance text-muted-foreground">
+                                    Login to your Aether Inc account
+                                </p>
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="email">Email</Label>
+                                <Input
+                                    id="email"
+                                    type="email"
+                                    placeholder="m@example.com"
+                                    required
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={email}
+                                />
+                            </div>
+                            <div className="grid gap-2">
+                                <div className="flex items-center">
+                                    <Label htmlFor="password">Password</Label>
+                                    <a
+                                        href="#"
+                                        className="ml-auto text-sm underline-offset-2 hover:underline"
+                                    >
+                                        Forgot your password?
+                                    </a>
+                                </div>
+                                <div className="relative w-full flex items-center">
+                                    <Input
+                                        type={isVisible ? "text" : "password"}
+                                        placeholder="Enter your password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        className="w-full h-12 rounded-xl pr-12" // Ensure there is padding to not overlap the icon
+                                    />
+                                    <button
+                                        onClick={toggleVisibility}
+                                        className="absolute right-0 inset-y-0 h-12 w-12 flex items-center justify-center rounded-xl"
+                                        aria-label="Toggle password visibility"  // Accessibility improvement
+                                    >
+                                        {isVisible ? <BsFillEyeFill /> : <BsEyeSlashFill />}
+                                    </button>
+                                </div>
 
-                    <Link href="/auth/forgot-password" className="text-blue-500 underline mt-2">
-                        Forgot password?
-                    </Link>
-                </div>
+                            </div>
+                            {error && <p className="text-red-500 mb-4">{error}</p>}
+                            <Button
+                                className="mt-4 w-full h-12 text-lg font-bold rounded-full"
+                                onClick={handleLogin}
+                                disabled={loading} // Disable button when loading
+                            >
+                                Login
+                            </Button>
+                            <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+                                <span className="relative z-10 bg-background px-2 text-muted-foreground">
+                                    Or continue with
+                                </span>
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <Button variant="outline" className="w-full">
+                                    <Image
+                                        src="/google.png"
+                                        alt="Apple Logo"
+                                        width={24}
+                                        height={24}
+                                    />
+                                    <span className="sr-only">Login with Apple</span>
+                                </Button>
+                                <Button variant="outline" className="w-full">
+                                    <Image
+                                        src="/apple-logo.png"
+                                        alt="Apple Logo"
+                                        width={24}
+                                        height={24}
+                                    />
+                                    <span className="sr-only">Login with Google</span>
+                                </Button>
+                            </div>
+                            <div className="text-center text-sm">
+                                Don&apos;t have an account?{" "}
+                                <a href="/signup" className="underline underline-offset-4">
+                                    Sign up
+                                </a>
+                            </div>
+                        </div>
+                    </form>
 
-                <Button
-                    className="mt-4 w-full h-12 text-lg font-bold rounded-full"
-                    onClick={handleLogin}
-                    disabled={loading} // Disable button when loading
-                >
-                    Login
-                </Button>
-
-                {/* If user doesn't have an account, they have to contact the admin */}
-                <div className="flex justify-center">
-                    <p className="mt-4">
-                        Don&apos;t have an account?{" "}
-                        <Link href={`mailto:rashodkorala2002@gmail.com`} className="text-blue-500 underline">
-                            Contact admin
-                        </Link>
-                    </p>
-                </div>
+                </CardContent>
             </Card>
+            <div className="text-balance text-center text-xs text-muted-foreground [&_a]:underline [&_a]:underline-offset-4 hover:[&_a]:text-primary">
+                By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
+                and <a href="#">Privacy Policy</a>.
+            </div>
         </div>
-    );
-};
-
-export default LoginPage;
+    )
+}

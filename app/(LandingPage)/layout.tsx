@@ -1,3 +1,4 @@
+import React from "react";
 import type { Metadata } from "next";
 import NavBar from '@/src/NavBar';
 import Footer from "@/src/Footer";
