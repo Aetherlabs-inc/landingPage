@@ -1,17 +1,14 @@
 "use client";
 import React from 'react'
 import { ThemeProvider } from './theme-provider'
-
-import { Amplify } from 'aws-amplify';
-import outputs from "@/amplify_outputs.json";
-Amplify.configure(outputs, { ssr: true });
+import { AuthProvider } from '@/src/components/auth-provider'
 
 export default function Provider({ children }: { children: React.ReactNode }) {
     return (
-        <ThemeProvider attribute="class" defaultTheme='light' disableTransitionOnChange>
-            {/* <AuthProvider> */}
-            {children}
-            {/* </AuthProvider> */}
-        </ThemeProvider>
+        <AuthProvider>
+            <ThemeProvider attribute="class" defaultTheme='light' disableTransitionOnChange>
+                {children}
+            </ThemeProvider>
+        </AuthProvider>
     )
 }

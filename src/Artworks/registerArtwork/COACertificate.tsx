@@ -1,5 +1,6 @@
 import React from 'react';
 import { Shield, QrCode, Hash, User, FileText, CheckCircle, AlertTriangle, Wifi, Building2, UserCheck } from 'lucide-react';
+import { formatArtistName } from '@/src/utils/artist-utils';
 
 interface COACertificateProps {
     artworkData: {
@@ -124,7 +125,7 @@ const COACertificate: React.FC<COACertificateProps> = ({
                         </div>
                         <div className="flex justify-between border-b border-gray-300 dark:border-gray-600 pb-2">
                             <span className="font-semibold text-black dark:text-white">Artist:</span>
-                            <span className="text-black dark:text-white text-right">{artworkData.artistName}</span>
+                            <span className="text-black dark:text-white text-right">{formatArtistName(artworkData.artistName)}</span>
                         </div>
                         <div className="flex justify-between border-b border-gray-300 dark:border-gray-600 pb-2">
                             <span className="font-semibold text-black dark:text-white">Year:</span>

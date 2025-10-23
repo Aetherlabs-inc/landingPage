@@ -29,7 +29,11 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "www.w3schools.com  ",
+        hostname: "www.w3schools.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.supabase.co",
       },
     ],
   },

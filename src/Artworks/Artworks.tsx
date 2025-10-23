@@ -1,117 +1,74 @@
 'use client'
-import React, { useState } from 'react';
-import { Search, Filter, Plus, Image as ImageIcon, Shield, AlertCircle, Clock, Eye, Wifi, CheckCircle, X } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, Filter, Plus, Image as ImageIcon, Shield, AlertCircle, Clock, Eye, Wifi, CheckCircle, X, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import RegisterArtwork from '@/src/Artworks/registerArtwork/RegisterArtwork';
 import COACertificate from '@/src/Artworks/registerArtwork/COACertificate';
 import ArtworkDetails from '@/src/Artworks/ArtworkDetails';
+import { useAuth } from '@/src/components/auth-provider';
+import { ArtworkService } from '@/src/services/artwork-service';
+import { ArtworkWithDetails } from '@/src/types/database';
+import { formatArtistName } from '@/src/utils/artist-utils';
 
-interface ArtworkType {
-    id: number;
-    title: string;
-    artist: string;
-    year: string;
-    medium: string;
-    dimensions: string;
-    status: string;
-    date: string;
-    image: string;
-    hasCertificate: boolean;
-    certificateId?: string;
-    verificationLevel: string;
-    hasNFC: boolean;
-    nfcUid?: string;
-    blockchainHash?: string;
-}
 
 const Artworks: React.FC = () => {
+    const { user } = useAuth();
     const [showRegisterForm, setShowRegisterForm] = useState(false);
-    const [selectedArtwork, setSelectedArtwork] = useState<ArtworkType | null>(null);
+    const [selectedArtwork, setSelectedArtwork] = useState<ArtworkWithDetails | null>(null);
     const [showCertificate, setShowCertificate] = useState(false);
     const [showArtworkDetails, setShowArtworkDetails] = useState(false);
+    const [artworks, setArtworks] = useState<ArtworkWithDetails[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+    const [deletingArtworkId, setDeletingArtworkId] = useState<string | null>(null);
 
-    // Dummy data for demonstration
+    // Load artworks on component mount
+    useEffect(() => {
+        const loadArtworks = async () => {
+            if (!user) return;
+
+            try {
+                setLoading(true);
+                const data = await ArtworkService.getArtworks();
+                setArtworks(data);
+            } catch (err) {
+                setError(err instanceof Error ? err.message : 'Failed to load artworks');
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadArtworks();
+    }, [user]);
+
+    // Calculate stats from real data
     const stats = [
-        { label: 'Total Artworks', value: '156', icon: ImageIcon },
-        { label: 'Authenticated', value: '142', icon: Shield },
-        { label: 'Pending Verification', value: '8', icon: Clock },
-        { label: 'Needs Review', value: '6', icon: AlertCircle },
+        {
+            label: 'Total Artworks',
+            value: artworks.length.toString(),
+            icon: ImageIcon
+        },
+        {
+            label: 'Authenticated',
+            value: artworks.filter(a => a.status === 'authenticated').length.toString(),
+            icon: Shield
+        },
+        {
+            label: 'Pending Verification',
+            value: artworks.filter(a => a.status === 'pending_verification').length.toString(),
+            icon: Clock
+        },
+        {
+            label: 'Needs Review',
+            value: artworks.filter(a => a.status === 'needs_review').length.toString(),
+            icon: AlertCircle
+        },
     ];
 
-    const artworks = [
-        {
-            id: 1,
-            title: 'Abstract Harmony',
-            artist: 'Jane Doe',
-            year: '2024',
-            medium: 'Oil on Canvas',
-            dimensions: '24 × 36 in',
-            status: 'Authenticated',
-            date: '2024-03-15',
-            image: '/placeholder-artwork.jpg',
-            hasCertificate: true,
-            certificateId: 'COA-2024-001-ABC123',
-            verificationLevel: 'artist_verified',
-            hasNFC: true,
-            nfcUid: 'NFC-001-456789',
-            blockchainHash: '0x1234567890abcdef1234567890abcdef12345678'
-        },
-        {
-            id: 2,
-            title: 'Digital Dreams',
-            artist: 'John Smith',
-            year: '2024',
-            medium: 'Digital Art',
-            dimensions: '1920 × 1080 px',
-            status: 'Pending Verification',
-            date: '2024-03-14',
-            image: '/placeholder-artwork.jpg',
-            hasCertificate: false,
-            certificateId: null,
-            verificationLevel: 'unverified',
-            hasNFC: false,
-            nfcUid: null,
-            blockchainHash: null
-        },
-        {
-            id: 3,
-            title: 'Urban Landscape',
-            artist: 'Sarah Wilson',
-            year: '2023',
-            medium: 'Acrylic on Canvas',
-            dimensions: '30 × 40 in',
-            status: 'Authenticated',
-            date: '2024-03-10',
-            image: '/placeholder-artwork.jpg',
-            hasCertificate: true,
-            certificateId: 'COA-2024-002-DEF456',
-            verificationLevel: 'gallery_verified',
-            hasNFC: false,
-            nfcUid: null,
-            blockchainHash: '0xabcdef1234567890abcdef1234567890abcdef12'
-        },
-        {
-            id: 4,
-            title: 'Sculpture Series #1',
-            artist: 'Mike Chen',
-            year: '2024',
-            medium: 'Bronze',
-            dimensions: '12 × 8 × 6 in',
-            status: 'Needs Review',
-            date: '2024-03-08',
-            image: '/placeholder-artwork.jpg',
-            hasCertificate: false,
-            certificateId: null,
-            verificationLevel: 'unverified',
-            hasNFC: false,
-            nfcUid: null,
-            blockchainHash: null
-        }
-    ];
-
-    const handleViewArtwork = (artwork: ArtworkType) => {
+    const handleViewArtwork = (artwork: ArtworkWithDetails) => {
         setSelectedArtwork(artwork);
         setShowArtworkDetails(true);
     };
@@ -138,6 +95,27 @@ const Artworks: React.FC = () => {
         setSelectedArtwork(null);
     };
 
+    const handleDeleteArtwork = async (artworkId: string) => {
+        try {
+            setDeletingArtworkId(artworkId);
+            await ArtworkService.deleteArtwork(artworkId);
+
+            // Remove the artwork from the local state
+            setArtworks(prevArtworks => prevArtworks.filter(artwork => artwork.id !== artworkId));
+
+            // If the deleted artwork was selected, clear the selection
+            if (selectedArtwork?.id === artworkId) {
+                setSelectedArtwork(null);
+                setShowArtworkDetails(false);
+                setShowCertificate(false);
+            }
+        } catch (err) {
+            setError(err instanceof Error ? err.message : 'Failed to delete artwork');
+        } finally {
+            setDeletingArtworkId(null);
+        }
+    };
+
     if (showRegisterForm) {
         return <RegisterArtwork onBack={() => setShowRegisterForm(false)} />;
     }
@@ -150,6 +128,7 @@ const Artworks: React.FC = () => {
                 onViewCOA={handleViewCertificate}
                 onGenerateCOA={handleGenerateCertificate}
                 onConnectNFC={handleConnectNFC}
+                onDelete={handleDeleteArtwork}
             />
         );
     }
@@ -177,22 +156,22 @@ const Artworks: React.FC = () => {
                 <COACertificate
                     artworkData={{
                         title: selectedArtwork.title,
-                        year: selectedArtwork.year,
+                        year: selectedArtwork.year.toString(),
                         medium: selectedArtwork.medium,
                         dimensions: selectedArtwork.dimensions,
                         artistName: selectedArtwork.artist,
-                        imageUrl: selectedArtwork.image
+                        imageUrl: selectedArtwork.image_url || undefined
                     }}
                     certificateData={{
-                        certificateId: selectedArtwork.certificateId ?? '',
-                        qrCode: `https://aether.app/verify/${selectedArtwork.certificateId}`,
-                        blockchainHash: selectedArtwork.blockchainHash ?? '',
-                        generatedAt: selectedArtwork.date
+                        certificateId: selectedArtwork.certificates?.[0]?.certificate_id ?? '',
+                        qrCode: `https://aether.app/verify/${selectedArtwork.certificates?.[0]?.certificate_id}`,
+                        blockchainHash: selectedArtwork.certificates?.[0]?.blockchain_hash ?? '',
+                        generatedAt: selectedArtwork.certificates?.[0]?.generated_at ?? selectedArtwork.created_at
                     }}
                     verificationLevel={{
-                        level: selectedArtwork.verificationLevel as 'artist_verified' | 'unverified' | 'gallery_verified' | 'third_party_verified',
-                        hasNFC: selectedArtwork.hasNFC,
-                        nfcUid: selectedArtwork.nfcUid
+                        level: selectedArtwork.verification_levels?.[0]?.level ?? 'unverified',
+                        hasNFC: selectedArtwork.nfc_tags?.some(tag => tag.is_bound) ?? false,
+                        nfcUid: selectedArtwork.nfc_tags?.find(tag => tag.is_bound)?.nfc_uid
                     }}
                     className="shadow-lg"
                 />
@@ -250,85 +229,143 @@ const Artworks: React.FC = () => {
                 </Button>
             </div>
 
+            {/* Loading State */}
+            {loading && (
+                <div className="text-center py-8">
+                    <p className="text-black dark:text-white">Loading artworks...</p>
+                </div>
+            )}
+
+            {/* Error State */}
+            {error && (
+                <div className="text-center py-8">
+                    <p className="text-red-500">Error: {error}</p>
+                </div>
+            )}
+
             {/* Artworks Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {artworks.map((artwork) => (
-                    <Card key={artwork.id} className="border border-black dark:border-white bg-white dark:bg-black overflow-hidden hover:shadow-lg transition-shadow">
-                        <div className="aspect-w-16 aspect-h-9 bg-gray-100 dark:bg-gray-900">
-                            <img
-                                src={artwork.image}
-                                alt={artwork.title}
-                                className="object-cover w-full h-48"
-                            />
-                        </div>
-                        <CardContent className="p-4">
-                            <div className="mb-3">
-                                <h3 className="font-semibold text-lg text-black dark:text-white mb-1">{artwork.title}</h3>
-                                <p className="text-black dark:text-white text-sm mb-1">{artwork.artist}</p>
-                                <p className="text-gray-600 dark:text-gray-400 text-xs">{artwork.year} • {artwork.medium}</p>
-                            </div>
+            {!loading && !error && (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {artworks.map((artwork) => {
+                        const hasCertificate = artwork.certificates && artwork.certificates.length > 0;
+                        const hasNFC = artwork.nfc_tags && artwork.nfc_tags.some(tag => tag.is_bound);
 
-                            {/* Certificate Status */}
-                            <div className="mb-3">
-                                {artwork.hasCertificate ? (
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <CheckCircle className="h-4 w-4 text-black dark:text-white" />
-                                        <span className="text-sm font-medium text-black dark:text-white">Certificate Issued</span>
-                                        <Badge variant="outline" className="text-xs border-black dark:border-white text-black dark:text-white">
-                                            {artwork.certificateId}
-                                        </Badge>
-                                    </div>
-                                ) : (
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <AlertCircle className="h-4 w-4 text-gray-500" />
-                                        <span className="text-sm text-gray-500">No Certificate</span>
-                                    </div>
-                                )}
-
-                                {/* NFC Status */}
-                                <div className="flex items-center gap-2 mb-2">
-                                    {artwork.hasNFC ? (
-                                        <>
-                                            <Wifi className="h-4 w-4 text-black dark:text-white" />
-                                            <span className="text-xs text-black dark:text-white">NFC Linked</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Wifi className="h-4 w-4 text-gray-400" />
-                                            <span className="text-xs text-gray-500">No NFC</span>
-                                        </>
-                                    )}
+                        return (
+                            <Card key={artwork.id} className="border border-black dark:border-white bg-white dark:bg-black overflow-hidden hover:shadow-lg transition-shadow">
+                                <div className="aspect-w-16 aspect-h-9 bg-gray-100 dark:bg-gray-900">
+                                    <img
+                                        src={artwork.image_url || '/placeholder-artwork.jpg'}
+                                        alt={artwork.title}
+                                        className="object-cover w-full h-48"
+                                    />
                                 </div>
-                            </div>
+                                <CardContent className="p-4">
+                                    <div className="mb-3">
+                                        <h3 className="font-semibold text-lg text-black dark:text-white mb-1">{artwork.title}</h3>
+                                        <p className="text-black dark:text-white text-sm mb-1">{formatArtistName(artwork.artist)}</p>
+                                        <p className="text-gray-600 dark:text-gray-400 text-xs">{artwork.year} • {artwork.medium}</p>
+                                    </div>
 
-                            {/* Status and Date */}
-                            <div className="flex justify-between items-center mb-3">
-                                <span className={`px-2 py-1 rounded-full text-xs font-medium ${artwork.status === 'Authenticated'
-                                    ? 'bg-black dark:bg-white text-white dark:text-black'
-                                    : artwork.status === 'Pending Verification'
-                                        ? 'bg-yellow-500 text-black'
-                                        : 'bg-gray-500 text-white'
-                                    }`}>
-                                    {artwork.status}
-                                </span>
-                                <span className="text-xs text-gray-600 dark:text-gray-400">{artwork.date}</span>
-                            </div>
+                                    {/* Certificate Status */}
+                                    <div className="mb-3">
+                                        {hasCertificate ? (
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <CheckCircle className="h-4 w-4 text-black dark:text-white" />
+                                                <span className="text-sm font-medium text-black dark:text-white">Certificate Issued</span>
+                                                <Badge variant="outline" className="text-xs border-black dark:border-white text-black dark:text-white">
+                                                    {artwork.certificates?.[0]?.certificate_id}
+                                                </Badge>
+                                            </div>
+                                        ) : (
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <AlertCircle className="h-4 w-4 text-gray-500" />
+                                                <span className="text-sm text-gray-500">No Certificate</span>
+                                            </div>
+                                        )}
 
-                            {/* Action Buttons */}
-                            <div className="flex gap-2">
-                                <Button
-                                    onClick={() => handleViewArtwork(artwork as ArtworkType)}
-                                    size="sm"
-                                    className="flex-1 bg-black hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 text-white dark:text-black"
-                                >
-                                    <Eye className="h-3 w-3 mr-1" />
-                                    View Details
-                                </Button>
-                            </div>
-                        </CardContent>
-                    </Card>
-                ))}
-            </div>
+                                        {/* NFC Status */}
+                                        <div className="flex items-center gap-2 mb-2">
+                                            {hasNFC ? (
+                                                <>
+                                                    <Wifi className="h-4 w-4 text-black dark:text-white" />
+                                                    <span className="text-xs text-black dark:text-white">NFC Linked</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <Wifi className="h-4 w-4 text-gray-400" />
+                                                    <span className="text-xs text-gray-500">No NFC</span>
+                                                </>
+                                            )}
+                                        </div>
+                                    </div>
+
+                                    {/* Status and Date */}
+                                    <div className="flex justify-between items-center mb-3">
+                                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${artwork.status === 'authenticated'
+                                            ? 'bg-black dark:bg-white text-white dark:text-black'
+                                            : artwork.status === 'pending_verification'
+                                                ? 'bg-yellow-500 text-black'
+                                                : 'bg-gray-500 text-white'
+                                            }`}>
+                                            {artwork.status.replace('_', ' ').toUpperCase()}
+                                        </span>
+                                        <span className="text-xs text-gray-600 dark:text-gray-400">
+                                            {new Date(artwork.created_at).toLocaleDateString()}
+                                        </span>
+                                    </div>
+
+                                    {/* Action Buttons */}
+                                    <div className="flex gap-2">
+                                        <Button
+                                            onClick={() => handleViewArtwork(artwork)}
+                                            size="sm"
+                                            className="flex-1 bg-black hover:bg-gray-800 dark:bg-white dark:hover:bg-gray-200 text-white dark:text-black"
+                                        >
+                                            <Eye className="h-3 w-3 mr-1" />
+                                            View Details
+                                        </Button>
+
+                                        <AlertDialog>
+                                            <AlertDialogTrigger asChild>
+                                                <Button
+                                                    size="sm"
+                                                    variant="outline"
+                                                    className="border-red-500 text-red-500 hover:bg-red-50 dark:hover:bg-red-950"
+                                                    disabled={deletingArtworkId === artwork.id}
+                                                >
+                                                    <Trash2 className="h-3 w-3" />
+                                                </Button>
+                                            </AlertDialogTrigger>
+                                            <AlertDialogContent>
+                                                <AlertDialogHeader>
+                                                    <AlertDialogTitle>Delete Artwork</AlertDialogTitle>
+                                                    <AlertDialogDescription>
+                                                        Are you sure you want to delete &quot;{artwork.title}&quot;? This action cannot be undone.
+                                                        {artwork.certificates && artwork.certificates.length > 0 && (
+                                                            <span className="block mt-2 text-amber-600 dark:text-amber-400">
+                                                                ⚠️ This artwork has certificates and NFC tags that will also be deleted.
+                                                            </span>
+                                                        )}
+                                                    </AlertDialogDescription>
+                                                </AlertDialogHeader>
+                                                <AlertDialogFooter>
+                                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                                    <AlertDialogAction
+                                                        onClick={() => handleDeleteArtwork(artwork.id)}
+                                                        className="bg-red-600 hover:bg-red-700 text-white"
+                                                    >
+                                                        Delete
+                                                    </AlertDialogAction>
+                                                </AlertDialogFooter>
+                                            </AlertDialogContent>
+                                        </AlertDialog>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        );
+                    })}
+                </div>
+            )}
         </div>
     );
 };

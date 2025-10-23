@@ -12,13 +12,13 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { Settings, Home, Image, Users, CreditCard, HelpCircle, LogOut } from "lucide-react";
-import { signOut } from 'aws-amplify/auth';
+import { Settings, Home, Image, Users, CreditCard, HelpCircle, LogOut, User } from "lucide-react";
+import { createClient } from '@/src/lib/supabase';
 
-
+const supabase = createClient();
 
 async function handleSignOut() {
-  await signOut();
+  await supabase.auth.signOut();
   window.location.href = "/login";
 }
 
@@ -28,6 +28,7 @@ const navGroups = [
     items: [
       { title: "Dashboard", icon: Home, url: "/dashboard" },
       { title: "Artworks", icon: Image, url: "/artworks" },
+      { title: "Profile", icon: User, url: "/profile" },
     ],
   },
   {

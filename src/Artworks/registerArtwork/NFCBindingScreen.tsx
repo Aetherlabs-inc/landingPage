@@ -13,6 +13,7 @@ import {
     Smartphone,
     Shield,
 } from 'lucide-react';
+import { ArtworkRegistrationService } from '@/src/services/artwork-registration-service';
 
 interface NFCBindingScreenProps {
     artworkData: {
@@ -59,17 +60,15 @@ const NFCBindingScreen: React.FC<NFCBindingScreenProps> = ({
             // Simulate NFC scanning
             await new Promise(resolve => setTimeout(resolve, 3000));
 
-            // Simulate successful scan
-            const newNFCData: NFCData = {
-                nfcUid: `NFC-${Date.now()}-${Math.random().toString(36).substr(2, 8).toUpperCase()}`,
-                isBound: true,
-                bindingStatus: 'success'
-            };
+            // Generate NFC UID and bind to artwork
+            const nfcUid = `NFC-${Date.now()}-${Math.random().toString(36).substr(2, 8).toUpperCase()}`;
+            const newNFCData = await ArtworkRegistrationService.bindNFCTag('temp-artwork-id', nfcUid);
 
             setNfcData(newNFCData);
             setIsScanning(false);
         } catch (error) {
             console.error('NFC scan failed:', error);
+            alert(`Error binding NFC tag: ${error instanceof Error ? error.message : 'Unknown error'}`);
             setIsScanning(false);
         }
     };

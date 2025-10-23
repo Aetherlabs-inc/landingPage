@@ -18,6 +18,7 @@ import {
 import COADecisionScreen from './COADecisionScreen';
 import COAGenerationScreen from './COAGenerationScreen';
 import NFCBindingScreen from './NFCBindingScreen';
+import { ArtworkRegistrationService } from '@/src/services/artwork-registration-service';
 
 interface ArtworkFormData {
     // Identity (Core MVP)
@@ -171,25 +172,44 @@ const RegisterArtwork: React.FC<RegisterArtworkProps> = ({ onBack }) => {
 
     const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
+        console.log('Image upload triggered, file:', file);
+
         if (file) {
+            console.log('File details:', {
+                name: file.name,
+                size: file.size,
+                type: file.type,
+                lastModified: file.lastModified
+            });
+
             // Validate file
             if (file.size > 10 * 1024 * 1024) { // 10MB limit
+                console.error('File too large:', file.size);
                 setErrors(prev => ({ ...prev, primaryImage: 'Image must be less than 10MB' }));
                 return;
             }
 
             const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
             if (!validTypes.includes(file.type)) {
+                console.error('Invalid file type:', file.type);
                 setErrors(prev => ({ ...prev, primaryImage: 'Only JPG, PNG, and WEBP files are allowed' }));
                 return;
             }
 
+            console.log('File validation passed, setting form data');
             setFormData(prev => ({ ...prev, primaryImage: file }));
+
             const reader = new FileReader();
             reader.onload = (e) => {
+                console.log('FileReader loaded, setting preview image');
                 setPreviewImage(e.target?.result as string);
             };
+            reader.onerror = (e) => {
+                console.error('FileReader error:', e);
+            };
             reader.readAsDataURL(file);
+        } else {
+            console.log('No file selected');
         }
     };
 
@@ -280,27 +300,35 @@ const RegisterArtwork: React.FC<RegisterArtworkProps> = ({ onBack }) => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Skip validation for testing
-        // if (!validateForm()) {
-        //     return;
-        // }
+        // Validate form
+        if (!validateForm()) {
+            return;
+        }
 
         console.log('Form data:', formData);
         console.log('Errors:', errors);
-        console.log(validateForm());
-        return;
 
         setIsSubmitting(true);
 
         try {
-            // Save artwork data (simulate API call)
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            console.log('Starting artwork creation with form data:', {
+                title: formData.title,
+                hasImage: !!formData.primaryImage,
+                imageName: formData.primaryImage?.name,
+                imageSize: formData.primaryImage?.size
+            });
+
+            // Create artwork in database
+            const artwork = await ArtworkRegistrationService.createArtwork(formData);
+            console.log('Artwork created successfully:', artwork);
 
             // Navigate to COA decision screen
             setCurrentScreen('coa-decision');
         } catch (error) {
             console.error('Error registering artwork:', error);
-            alert('Error registering artwork. Please try again.');
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            console.error('Full error details:', error);
+            alert(`Error registering artwork: ${errorMessage}`);
         } finally {
             setIsSubmitting(false);
         }

@@ -13,6 +13,7 @@ import {
     Loader2
 } from 'lucide-react';
 import COACertificate from './COACertificate';
+import { ArtworkRegistrationService } from '@/src/services/artwork-registration-service';
 
 interface COAGenerationScreenProps {
     artworkData: {
@@ -73,20 +74,14 @@ const COAGenerationScreen: React.FC<COAGenerationScreenProps> = ({
 
     const generateCOA = async () => {
         try {
-            // Simulate COA generation
-            await new Promise(resolve => setTimeout(resolve, 2000));
-
-            const newCOAData: COAData = {
-                certificateId: `COA-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
-                qrCode: `https://aether.app/verify/${Date.now()}`,
-                blockchainHash: `0x${Math.random().toString(16).substr(2, 64)}`,
-                generatedAt: new Date().toISOString()
-            };
+            // Generate COA using the service
+            const newCOAData = await ArtworkRegistrationService.generateCOA('temp-artwork-id');
 
             setCoaData(newCOAData);
             setIsGenerating(false);
         } catch (error) {
             console.error('Error generating COA:', error);
+            alert(`Error generating COA: ${error instanceof Error ? error.message : 'Unknown error'}`);
             setIsGenerating(false);
         }
     };
