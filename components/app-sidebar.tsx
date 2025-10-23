@@ -12,7 +12,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { Settings, Home, Image, Layers, Users, CreditCard, HelpCircle, LogOut } from "lucide-react";
+import { Settings, Home, Image, Users, CreditCard, HelpCircle, LogOut } from "lucide-react";
 import { signOut } from 'aws-amplify/auth';
 
 
@@ -28,8 +28,6 @@ const navGroups = [
     items: [
       { title: "Dashboard", icon: Home, url: "/dashboard" },
       { title: "Artworks", icon: Image, url: "/artworks" },
-      { title: "Collections", icon: Layers, url: "/collections" },
-      { title: "Exhibitions", icon: Layers, url: "/exhibitions" },
     ],
   },
   {
@@ -54,7 +52,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        
+
       </SidebarHeader>
       <SidebarContent>
         {navGroups.map((group) => (
