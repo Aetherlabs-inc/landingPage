@@ -73,23 +73,23 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="min-h-screen p-6 bg-background">
-            <div className="mx-auto">
-                <div className="flex justify-between items-center mb-8">
+        <div className="min-h-screen bg-background px-4 py-6 sm:px-6">
+            <div className="mx-auto w-full max-w-6xl">
+                <div className="mb-6 flex flex-col gap-4 md:mb-8 md:flex-row md:items-center md:justify-between">
                     <h1 className="text-3xl font-bold text-foreground">Dashboard Overview</h1>
-                    <div className="flex items-center space-x-4">
-                        <Button variant="ghost" size="icon">
+                    <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center sm:justify-end">
+                        <Button variant="ghost" size="icon" className="self-end sm:self-auto">
                             <Bell className="w-5 h-5" />
                         </Button>
-                        <div className="relative">
+                        <div className="relative w-full sm:w-[220px]">
                             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                            <Input placeholder="Search..." className="pl-9 w-[200px]" />
+                            <Input placeholder="Search..." className="w-full pl-9" />
                         </div>
                     </div>
                 </div>
 
                 {/* Stats */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3">
                     <motion.div {...fadeInUp(0.0)}>
                         <Card>
                             <CardContent className="pt-6">
@@ -140,7 +140,7 @@ const Dashboard = () => {
                 </div>
 
                 {/* Quick Actions & Recent Activity */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                     <motion.div {...fadeInUp(0.0)}>
                         <Card>
                             <CardHeader>
@@ -150,7 +150,7 @@ const Dashboard = () => {
                                 </CardTitle>
                             </CardHeader>
                             <CardContent>
-                                <div className="grid grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                     <Button variant="outline" className="w-full justify-start">
                                         <Image className="w-5 h-5 mr-2" />
                                         Add Artwork
@@ -215,7 +215,7 @@ const Dashboard = () => {
                         </CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                        <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-3">
                             <motion.div {...fadeInUp(0.0)}>
                                 <Card>
                                     <CardContent className="pt-6">
@@ -248,12 +248,12 @@ const Dashboard = () => {
                         </div>
 
                         {/* Charts Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                             <motion.div {...fadeInUp(0.0)}>
                                 <Card>
                                     <CardContent className="pt-6">
                                         <h3 className="text-sm font-medium text-muted-foreground mb-4">Certificate Issuance Trend</h3>
-                                        <div className="h-[300px]">
+                                        <div className="h-64 md:h-[300px]">
                                             <Line data={certificateTrendData} options={{ maintainAspectRatio: false }} />
                                         </div>
                                     </CardContent>
@@ -264,7 +264,7 @@ const Dashboard = () => {
                                 <Card>
                                     <CardContent className="pt-6">
                                         <h3 className="text-sm font-medium text-muted-foreground mb-4">Artwork Categories</h3>
-                                        <div className="h-[300px]">
+                                        <div className="h-64 md:h-[300px]">
                                             <Doughnut data={categoryData} options={{ maintainAspectRatio: false }} />
                                         </div>
                                     </CardContent>
