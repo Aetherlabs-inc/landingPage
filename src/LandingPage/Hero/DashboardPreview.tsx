@@ -547,10 +547,10 @@ const DashboardPreview = () => {
                                                     <Badge
                                                         variant={artwork.status === 'authenticated' ? 'default' : 'outline'}
                                                         className={`text-xs ${artwork.status === 'authenticated'
-                                                                ? 'bg-primary text-primary-foreground'
-                                                                : artwork.status === 'pending_verification'
-                                                                    ? 'bg-yellow-500/20 text-yellow-700 dark:text-yellow-400'
-                                                                    : 'bg-gray-500/20 text-gray-700 dark:text-gray-400'
+                                                            ? 'bg-primary text-primary-foreground'
+                                                            : artwork.status === 'pending_verification'
+                                                                ? 'bg-yellow-500/20 text-yellow-700 dark:text-yellow-400'
+                                                                : 'bg-gray-500/20 text-gray-700 dark:text-gray-400'
                                                             }`}
                                                     >
                                                         {artwork.status.replace('_', ' ').toUpperCase()}

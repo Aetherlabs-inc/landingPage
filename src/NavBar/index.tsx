@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
@@ -13,6 +13,18 @@ const Header = () => {
     const router = useRouter();
     const [activePage, setActivePage] = useState('features');
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 16);
+        };
+
+        handleScroll();
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const handleJoinWaitlist = () => {
         router.push('/waitlist');
@@ -34,9 +46,16 @@ const Header = () => {
 
 
     return (
-        <div className="sticky top-0 z-50 pt-8 px-4">
-            <header className="w-full max-w-7xl mx-auto py-3 px-6 md:px-8 flex items-center justify-between">
-                <div className="p-3">
+        <div className="sticky top-0 z-50 flex w-full justify-center px-4 pt-4 sm:px-6 lg:px-8">
+            <header
+                className={cn(
+                    "relative flex w-full max-w-7xl items-center justify-between rounded-[45px] px-4 py-4 sm:px-6 lg:px-8 transition-all duration-300",
+                    isScrolled
+                        ? "border border-border/60 bg-background/80 shadow-lg backdrop-blur-lg"
+                        : "bg-background/40"
+                )}
+            >
+                <div className="flex items-center gap-3">
                     <Link href="/">
                         <span
                             aria-label="AetherLabs"
@@ -44,21 +63,23 @@ const Header = () => {
                         >
                             ÆL
                         </span>
-                        <span className="text-xl font-medium tracking-tight text-foreground"> AetherLabs</span>
+                        <span className="text-lg font-medium tracking-tight text-foreground sm:text-xl"> AetherLabs</span>
                     </Link>
                 </div>
 
                 {/* Mobile menu button */}
                 <button
-                    className="md:hidden p-3 rounded-2xl text-muted-foreground hover:text-foreground"
+                    className="md:hidden rounded-2xl p-3 text-muted-foreground hover:text-foreground"
                     onClick={toggleMobileMenu}
+                    aria-label="Toggle navigation"
+                    aria-expanded={mobileMenuOpen}
                 >
                     {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
                 </button>
 
                 {/* Desktop navigation */}
-                <nav className="hidden md:flex items-center absolute left-1/2 transform -translate-x-1/2">
-                    <div className="rounded-full px-1 py-1 backdrop-blur-md bg-background/80 border border-border shadow-lg">
+                <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center md:flex">
+                    <div className="rounded-full border border-border/60 bg-background/80 px-1 py-1 shadow-lg backdrop-blur-md">
                         <ToggleGroup type="single" value={activePage} onValueChange={(value) => value && setActivePage(value)}>
                             <ToggleGroupItem
                                 value="features"
@@ -86,7 +107,7 @@ const Header = () => {
 
                 {/* Mobile navigation */}
                 {mobileMenuOpen && (
-                    <div className="md:hidden absolute top-20 left-4 right-4 bg-background/95 backdrop-blur-md py-4 px-6 border border-border rounded-2xl shadow-lg z-50">
+                    <div className="absolute left-4 right-4 top-full z-50 mt-4 rounded-2xl border border-border/60 bg-background/95 px-6 py-4 shadow-xl backdrop-blur-md md:hidden">
                         <div className="flex flex-col gap-4">
                             <a
                                 href="#features"
@@ -113,6 +134,16 @@ const Header = () => {
 
                             {/* Add theme toggle for mobile */}
                             <ThemeSwitcherWithLabel />
+
+                            <Button
+                                onClick={() => {
+                                    handleJoinWaitlist();
+                                    setMobileMenuOpen(false);
+                                }}
+                                className="h-11 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90"
+                            >
+                                Join Waitlist
+                            </Button>
                         </div>
                     </div>
                 )}
