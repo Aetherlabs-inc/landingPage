@@ -61,7 +61,7 @@ const Header = () => {
                             aria-label="AetherLabs"
                             className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-foreground text-background font-semibold tracking-tight"
                         >
-                            ÆL
+                            Æ
                         </span>
                         <span className="text-lg font-medium tracking-tight text-foreground sm:text-xl"> AetherLabs</span>
                     </Link>

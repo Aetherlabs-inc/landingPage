@@ -88,8 +88,8 @@ const Footer = () => {
                             <li><a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Collections</a></li>
                             <li><a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Exhibitions</a></li>
                             <li><a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a></li>
-                            <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Updates</a></li>
-                            <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Roadmap</a></li>
+                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Updates</a></li>
+                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Roadmap</a></li>
                         </ul>
                     </div>
 
@@ -97,11 +97,11 @@ const Footer = () => {
                     <div className="space-y-4">
                         <h4 className="font-medium text-lg text-foreground">Company</h4>
                         <ul className="space-y-3">
-                            <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">About</a></li>
-                            <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a></li>
-                            <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Careers</a></li>
-                            <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Press</a></li>
-                            <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a></li>
+                            <li><a href="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</a></li>
+                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a></li>
+                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Careers</a></li>
+                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Press</a></li>
+                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a></li>
                         </ul>
                     </div>
 
@@ -109,11 +109,11 @@ const Footer = () => {
                     <div className="space-y-4">
                         <h4 className="font-medium text-lg text-foreground">Resources</h4>
                         <ul className="space-y-3">
-                            <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Documentation</a></li>
-                            <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Help Center</a></li>
-                            <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Implementation Guides</a></li>
-                            <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">API Reference</a></li>
-                            <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Community</a></li>
+                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Documentation</a></li>
+                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Help Center</a></li>
+                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Implementation Guides</a></li>
+                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">API Reference</a></li>
+                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Community</a></li>
                         </ul>
                     </div>
                 </div>
@@ -124,7 +124,7 @@ const Footer = () => {
                     <div className="flex gap-6 mt-4 md:mt-0">
                         <a href="/privacy" className="hover:text-foreground transition-colors">Privacy</a>
                         <a href="/terms" className="hover:text-foreground transition-colors">Terms</a>
-                        <a href="#" className="hover:text-foreground transition-colors">Cookies</a>
+                        <a href="/cookies" className="hover:text-foreground transition-colors">Cookies</a>
                     </div>
                 </div>
             </div>
