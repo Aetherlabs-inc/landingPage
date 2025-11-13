@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,7 +19,35 @@ interface SurveyFormProps {
 }
 
 const SurveyForm: React.FC<SurveyFormProps> = ({ config }) => {
-  // Safety check for config
+  // All hooks must be called before any conditional returns
+  const [formData, setFormData] = useState<Record<string, string | number | string[] | null>>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const { toast } = useToast();
+  const router = useRouter();
+
+  // Check if a question should be shown based on showIf conditions
+  const shouldShowQuestion = useCallback((question: SurveyQuestion): boolean => {
+    if (!question.showIf || question.showIf.length === 0) {
+      return true;
+    }
+
+    return question.showIf.every((condition) => {
+      const dependentValue = formData[condition.questionId];
+      return condition.in.includes(dependentValue as string);
+    });
+  }, [formData]);
+
+  // Filter questions based on conditional logic
+  const visibleQuestions = useMemo(() => {
+    if (!config?.questions) {
+      return [];
+    }
+    return config.questions.filter((question) => shouldShowQuestion(question));
+  }, [config?.questions, shouldShowQuestion]);
+
+  // Safety check for config (after all hooks)
   if (!config || !config.meta || !config.questions) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
@@ -32,31 +60,7 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ config }) => {
     );
   }
 
-  const [formData, setFormData] = useState<Record<string, any>>({});
-  const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const { toast } = useToast();
-  const router = useRouter();
-
-  // Check if a question should be shown based on showIf conditions
-  const shouldShowQuestion = (question: SurveyQuestion): boolean => {
-    if (!question.showIf || question.showIf.length === 0) {
-      return true;
-    }
-
-    return question.showIf.every((condition) => {
-      const dependentValue = formData[condition.questionId];
-      return condition.in.includes(dependentValue);
-    });
-  };
-
-  // Filter questions based on conditional logic
-  const visibleQuestions = useMemo(() => {
-    return config.questions.filter((question) => shouldShowQuestion(question));
-  }, [config.questions, formData]);
-
-  const handleInputChange = (questionId: string, value: any) => {
+  const handleInputChange = (questionId: string, value: string | number | string[] | null) => {
     setFormData((prev) => ({
       ...prev,
       [questionId]: value,
@@ -85,7 +89,7 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ config }) => {
       // Email validation for email type questions
       if (question.type === 'email' && formData[question.id]) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData[question.id])) {
+        if (!emailRegex.test(formData[question.id] as string)) {
           newErrors[question.id] = 'Please enter a valid email address';
         }
       }
@@ -188,7 +192,7 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ config }) => {
           <div className="space-y-3">
             {renderQuestionLabel(question)}
             <RadioGroup
-              value={value || ''}
+              value={value as string || ''}
               onValueChange={(val) => handleInputChange(question.id, val)}
             >
               {question.options?.map((option) => (
@@ -204,10 +208,10 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ config }) => {
           </div>
         );
 
-      case 'multi':
-        const currentValues = Array.isArray(value) ? value : [];
+      case 'multi': {
+        const currentValues = Array.isArray(value) ? (value as string[]) : [];
         const maxSelections = question.maxSelections || Infinity;
-        const canSelectMore = currentValues.length < maxSelections;
+        const canSelectMore = currentValues.length < (maxSelections as number);
 
         return (
           <div className="space-y-3">
@@ -247,11 +251,12 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ config }) => {
             {error && <p className="text-sm text-destructive">{error}</p>}
           </div>
         );
+      }
 
-      case 'scale':
+      case 'scale': {
         const min = question.min || 1;
         const max = question.max || 5;
-        const rating = value || 0;
+        const rating = value as number || 0;
         return (
           <div className="space-y-3">
             {renderQuestionLabel(question)}
@@ -272,11 +277,10 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ config }) => {
                       aria-label={`Rate ${starValue} out of ${max}`}
                     >
                       <Star
-                        className={`h-8 w-8 md:h-10 md:w-10 transition-colors ${
-                          starValue <= rating
-                            ? 'fill-primary text-primary'
-                            : 'fill-none text-muted-foreground'
-                        }`}
+                        className={`h-8 w-8 md:h-10 md:w-10 transition-colors ${starValue <= (rating as number)
+                          ? 'fill-primary text-primary'
+                          : 'fill-none text-muted-foreground'
+                          }`}
                       />
                     </button>
                   );
@@ -291,6 +295,7 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ config }) => {
             {error && <p className="text-sm text-destructive">{error}</p>}
           </div>
         );
+      }
 
       case 'email':
         return (
