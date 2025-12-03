@@ -46,15 +46,15 @@ const Header = () => {
 
 
     return (
-        <div className="sticky top-0 z-50 flex w-full justify-center px-4 pt-4 sm:px-6 lg:px-8">
-            <header
-                className={cn(
-                    "relative flex w-full max-w-7xl items-center justify-between rounded-[45px] px-4 py-4 sm:px-6 lg:px-8 transition-all duration-300",
-                    isScrolled
-                        ? "border border-border/60 bg-background/80 shadow-lg backdrop-blur-lg"
-                        : "bg-background/40"
-                )}
-            >
+        <header
+            className={cn(
+                "sticky top-0 z-50 w-full flex items-center justify-between px-4 py-6 sm:px-6 lg:px-8 transition-all duration-300",
+                isScrolled
+                    ? "border-b border-border/40 bg-background/60 backdrop-blur-md"
+                    : "bg-background/40 backdrop-blur-sm"
+            )}
+        >
+            <div className="flex w-full max-w-7xl mx-auto items-center justify-between relative">
                 <div className="flex items-center gap-3">
                     <Link href="/">
                         <span
@@ -160,8 +160,8 @@ const Header = () => {
                         </Button>
                     </div>
                 </div>
-            </header>
-        </div>
+            </div>
+        </header>
     );
 };
 
