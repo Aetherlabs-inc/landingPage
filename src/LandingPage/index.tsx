@@ -8,6 +8,7 @@ import HowItWorks from './HowItWorks'
 import Pricing from './Pricing'
 import FAQ from './FAQ'
 import UseCases from './UseCases'
+import Community from './Community'
 
 
 
@@ -17,6 +18,7 @@ const LandingPage = () => {
       <Hero />
       <AboutConcept />
       <HowItWorks />
+      <Community />
       <Features />
       {/* <Testimonials /> */}
       <UseCases />
