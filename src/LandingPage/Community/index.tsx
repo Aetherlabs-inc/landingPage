@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Users, Sparkles, Network, Heart, ArrowRight } from 'lucide-react';
-import Image from 'next/image';
 
 const Community = () => {
     const router = useRouter();
@@ -80,8 +79,8 @@ const Community = () => {
                     </h2>
                     
                     <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                        AetherLabs isn't just about protecting art—it's about empowering artists, 
-                        connecting collectors, and supporting galleries. We're building the infrastructure 
+                        AetherLabs isn&apos;t just about protecting art—it&apos;s about empowering artists, 
+                        connecting collectors, and supporting galleries. We&apos;re building the infrastructure 
                         for a more transparent, accessible, and vibrant art ecosystem.
                     </p>
                 </div>
@@ -195,8 +194,8 @@ const Community = () => {
                             Join the Movement
                         </h3>
                         <p className="text-muted-foreground max-w-2xl mx-auto">
-                            Be part of a community that's revolutionizing how art is authenticated, 
-                            collected, and shared. Together, we're building the future of the art world.
+                            Be part of a community that&apos;s revolutionizing how art is authenticated, 
+                            collected, and shared. Together, we&apos;re building the future of the art world.
                         </p>
                     </div>
                     <Button
