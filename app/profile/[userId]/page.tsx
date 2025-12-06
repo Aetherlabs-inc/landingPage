@@ -81,7 +81,7 @@ export default function PublicProfilePage() {
 
     const handleShare = async () => {
         // Always use username for share links (cleaner URLs)
-        if (!profile.username) {
+        if (!profile || !profile.username) {
             toast({
                 title: "Cannot Share",
                 description: "Please set a username in your profile settings to share your profile",

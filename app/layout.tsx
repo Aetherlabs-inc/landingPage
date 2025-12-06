@@ -1,10 +1,8 @@
 import React from "react";
 import type { Metadata } from "next";
 import "./../styles/globals.css";
-import Provider from "@/components/provider";
-
-
-
+import NavBar from "@/src/NavBar";
+import Footer from "@/src/Footer";
 export const metadata: Metadata = {
     metadataBase: new URL('https://aetherlabs.art'),
     title: {
@@ -91,12 +89,11 @@ export default function RootLayout({
                 <link rel="icon" href="/Aether-logo.png" type="image/png" />
             </head>
             <body className="flex flex-col">
-                <Provider>
-                    <main className="">
-                        {children}
-                    </main>
-                </Provider>
-
+                <main className="">
+                    <NavBar />
+                    {children}
+                    <Footer />
+                </main>
             </body>
 
         </html>
