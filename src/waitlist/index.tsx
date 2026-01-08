@@ -15,16 +15,17 @@ const Waitlist = () => {
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const { toast } = useToast();
     const router = useRouter();
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!name || !email || !role) {
+        if (!email) {
             toast({
                 title: "Missing Information",
-                description: "Please fill in all fields to join the waitlist.",
+                description: "Please enter your email address to join the waitlist.",
                 variant: "destructive",
             });
             return;
@@ -41,14 +42,42 @@ const Waitlist = () => {
             return;
         }
 
-        // Here you would typically send to your backend/email service
-        console.log({ name, email, role });
+        setIsSubmitting(true);
 
-        setIsSubmitted(true);
-        toast({
-            title: "Welcome to Aether! 🎉",
-            description: "You&apos;re on the list! Check your email for next steps.",
-        });
+        try {
+            const response = await fetch('/api/waitlist/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    name: name || null,
+                    role: role || null,
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || 'Failed to join waitlist');
+            }
+
+            setIsSubmitted(true);
+            toast({
+                title: "Welcome to Aether! 🎉",
+                description: "You&apos;re on the list! Check your email for next steps.",
+            });
+        } catch (error) {
+            console.error('Error submitting waitlist:', error);
+            toast({
+                title: "Submission Error",
+                description: error instanceof Error ? error.message : "Failed to join waitlist. Please try again.",
+                variant: "destructive",
+            });
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     if (isSubmitted) {
@@ -142,7 +171,7 @@ const Waitlist = () => {
                         </div>
 
                         <div className="space-y-3">
-                            <Label>I am a...</Label>
+                            <Label>I am a... <span className="text-muted-foreground text-sm font-normal">(optional)</span></Label>
                             <RadioGroup value={role} onValueChange={setRole} className="space-y-3">
                                 <div className="flex items-center space-x-3 p-4 rounded-lg border border-border hover:border-primary/50 transition-colors cursor-pointer">
                                     <RadioGroupItem value="artist" id="artist" />
@@ -169,8 +198,8 @@ const Waitlist = () => {
                         </div>
 
                         <div className="space-y-4 pt-4">
-                            <Button type="submit" size="lg" className="w-full">
-                                Join the Waitlist
+                            <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                                {isSubmitting ? 'Joining...' : 'Join the Waitlist'}
                             </Button>
 
                             <div className="text-center space-y-2">

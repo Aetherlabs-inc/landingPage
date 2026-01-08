@@ -10,7 +10,7 @@ This repository contains the landing page and public profile viewing functionali
 
 - **Landing Page**: Marketing site with hero, features, pricing, FAQ, and more
 - **Legal Pages**: Terms, Privacy Policy, Cookies
-- **Survey & Waitlist**: User engagement features
+- **Waitlist**: User engagement feature
 
 **Note**: Authentication (login/signup) and dashboard functionality are handled by separate repositories.
 
@@ -21,7 +21,7 @@ This repository contains the landing page and public profile viewing functionali
 - React 18
 - Tailwind CSS
 - shadcn/ui components
-- Supabase (for survey responses)
+- Supabase (for backend services)
 - Three.js (for animations)
 
 ## Getting Started
@@ -52,19 +52,17 @@ pnpm dev
 ```
 app/
   (LandingPage)/     # Landing page routes
-  api/survey/        # Survey API endpoint
   privacy/           # Legal pages
   terms/
   cookies/
-  survey/            # Survey page
   waitlist/          # Waitlist page
 
 src/
   LandingPage/       # Landing page components
   NavBar/            # Navigation
   Footer/            # Footer
-  lib/               # Supabase client (for survey)
-  types/             # TypeScript types (survey only)
+  lib/               # Supabase client and utilities
+  types/             # TypeScript types
 
 components/          # Shared UI components
 public/              # Static assets

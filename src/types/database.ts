@@ -1,25 +1,28 @@
 export interface Database {
     public: {
         Tables: {
-            survey_responses: {
+            waitlist: {
                 Row: {
                     id: string
-                    email: string | null
-                    responses: Record<string, any>
+                    email: string
+                    name: string | null
+                    role: string | null
                     created_at: string
                     updated_at: string
                 }
                 Insert: {
                     id?: string
-                    email?: string | null
-                    responses: Record<string, any>
+                    email: string
+                    name?: string | null
+                    role?: string | null
                     created_at?: string
                     updated_at?: string
                 }
                 Update: {
                     id?: string
-                    email?: string | null
-                    responses?: Record<string, any>
+                    email?: string
+                    name?: string | null
+                    role?: string | null
                     created_at?: string
                     updated_at?: string
                 }
@@ -28,4 +31,4 @@ export interface Database {
     }
 }
 
-export type SurveyResponse = Database['public']['Tables']['survey_responses']['Row']
+export type WaitlistEntry = Database['public']['Tables']['waitlist']['Row']
