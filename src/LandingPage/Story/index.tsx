@@ -23,7 +23,7 @@ const Tooltip = ({ children, content }: TooltipProps) => {
       {isVisible && (
         <span 
           className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-4 py-2 
-                     bg-[#2A2121] text-white text-sm rounded-lg shadow-lg
+                     bg-aether-dark text-white text-sm rounded-lg shadow-lg
                      min-w-[250px] max-w-[300px] text-center z-50
                      font-libre leading-relaxed"
           style={{ 
@@ -32,7 +32,7 @@ const Tooltip = ({ children, content }: TooltipProps) => {
         >
           {content}
           <span className="absolute top-full left-1/2 -translate-x-1/2 
-                          border-8 border-transparent border-t-[#2A2121]" />
+                          border-8 border-transparent border-t-aether-dark" />
         </span>
       )}
     </span>
@@ -101,10 +101,10 @@ const UserGroupCard = ({ title, line1, line2, color, delay }: UserGroupCardProps
       >
         {title}
       </h3>
-      <p className="font-cormorant text-xl text-[#2A2121] leading-relaxed">
+      <p className="font-cormorant text-xl text-aether-dark leading-relaxed">
         {line1}
       </p>
-      <p className="font-cormorant text-xl text-[#2A2121] leading-relaxed">
+      <p className="font-cormorant text-xl text-aether-dark leading-relaxed">
         {line2}
       </p>
     </div>
@@ -195,83 +195,83 @@ const Story = () => {
         
         <section className="mb-40">
           <FadeInElement delay={0}>
-            <p className="font-cormorant text-3xl text-[#2A2121] leading-relaxed mb-8">
+            <p className="font-cormorant text-3xl text-aether-dark leading-relaxed mb-8">
               Every piece of art carries a story.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={150}>
-            <p className="font-cormorant text-2xl text-[#B0B0B0] leading-relaxed mb-8">
+            <p className="font-cormorant text-2xl text-aether-gray leading-relaxed mb-8">
               Who made it. Who owned it. Where it&apos;s been.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={300}>
-            <p className="font-cormorant text-2xl text-[#2A2121] leading-relaxed mb-8">
+            <p className="font-cormorant text-2xl text-aether-dark leading-relaxed mb-8">
               This story is what makes art real. It&apos;s proof that what you&apos;re holding is authentic.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={450}>
-            <p className="font-cormorant text-2xl text-[#2A2121] leading-relaxed mb-12">
+            <p className="font-cormorant text-2xl text-aether-dark leading-relaxed mb-12">
               In the art world, this is called{' '}
               <Tooltip content="The documented history of an artwork — who created it, who owned it, and how it changed hands over time.">
-                <span className="text-[#BC8010] font-medium">provenance</span>
+                <span className="text-aether-gold font-medium">provenance</span>
               </Tooltip>
               {' '}— the chain of ownership that follows a piece through time.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={600}>
-            <p className="font-cormorant text-2xl text-[#2A2121] leading-relaxed mb-8">
+            <p className="font-cormorant text-2xl text-aether-dark leading-relaxed mb-8">
               For over a century, we&apos;ve trusted paper certificates to carry that proof. A signature. A stamp. A promise.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={750}>
-            <p className="font-playfair text-2xl text-[#CA5B2B] leading-relaxed mb-8 italic">
+            <p className="font-playfair text-2xl text-aether-terracotta leading-relaxed mb-8 italic">
               But paper fades.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={900}>
-            <p className="font-cormorant text-2xl text-[#CA5B2B] leading-relaxed mb-8">
+            <p className="font-cormorant text-2xl text-aether-terracotta leading-relaxed mb-8">
               Papers get lost in moves, floods, forgotten boxes.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={1050}>
-            <p className="font-cormorant text-2xl text-[#CA5B2B] leading-relaxed mb-8">
+            <p className="font-cormorant text-2xl text-aether-terracotta leading-relaxed mb-8">
               Signatures can be copied. Stamps can be forged.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={1200}>
-            <p className="font-cormorant text-2xl text-[#CA5B2B] leading-relaxed mb-12">
+            <p className="font-cormorant text-2xl text-aether-terracotta leading-relaxed mb-12">
               And every year, forgeries slip through. Fakes get sold. Trust breaks.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={1350}>
-            <p className="font-cormorant text-2xl text-[#2A2121] leading-relaxed mb-8">
+            <p className="font-cormorant text-2xl text-aether-dark leading-relaxed mb-8">
               When the proof disappears, the story disappears with it.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={1500}>
-            <p className="font-cormorant text-2xl text-[#B0B0B0] leading-relaxed mb-8">
+            <p className="font-cormorant text-2xl text-aether-gray leading-relaxed mb-8">
               The art is still beautiful. But something is missing.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={1650}>
-            <p className="font-cormorant text-2xl text-[#2A2121] leading-relaxed mb-12">
+            <p className="font-cormorant text-2xl text-aether-dark leading-relaxed mb-12">
               Its identity. Its history. Its value.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={1800}>
-            <p className="font-playfair text-3xl text-[#2A2121] leading-relaxed font-medium">
+            <p className="font-playfair text-3xl text-aether-dark leading-relaxed font-medium">
               Your legacy deserves better than a piece of paper.
             </p>
           </FadeInElement>
@@ -283,61 +283,61 @@ const Story = () => {
         
         <section className="mb-40">
           <FadeInElement delay={0}>
-            <p className="font-playfair text-3xl text-[#BC8010] leading-relaxed mb-12 italic">
+            <p className="font-playfair text-3xl text-aether-gold leading-relaxed mb-12 italic">
               There&apos;s a better way.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={150}>
-            <p className="font-cormorant text-2xl text-[#2A2121] leading-relaxed mb-8">
+            <p className="font-cormorant text-2xl text-aether-dark leading-relaxed mb-8">
               We built AetherLabs to protect what paper can&apos;t.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={300}>
-            <p className="font-cormorant text-2xl text-[#2A2121] leading-relaxed mb-12">
+            <p className="font-cormorant text-2xl text-aether-dark leading-relaxed mb-12">
               A digital{' '}
               <Tooltip content="A document that confirms an artwork is genuine, usually signed by the artist or an authority.">
-                <span className="text-[#BC8010] font-medium">certificate of authenticity</span>
+                <span className="text-aether-gold font-medium">certificate of authenticity</span>
               </Tooltip>
               {' '}that lives with your art. Not in a drawer. Not in a folder. With the piece itself.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={450}>
-            <p className="font-playfair text-xl text-[#B0B0B0] leading-relaxed mb-8">
+            <p className="font-playfair text-xl text-aether-gray leading-relaxed mb-8">
               Here&apos;s how it works.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={600}>
-            <p className="font-cormorant text-2xl text-[#2A2121] leading-relaxed mb-8">
+            <p className="font-cormorant text-2xl text-aether-dark leading-relaxed mb-8">
               Every artwork gets a small{' '}
               <Tooltip content="Near Field Communication. A technology that lets devices share information with a simple tap.">
-                <span className="text-[#BC8010] font-medium">NFC</span>
+                <span className="text-aether-gold font-medium">NFC</span>
               </Tooltip>
               {' '}tag. A tap from any smartphone reveals everything — the artist, the history, the proof.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={750}>
-            <p className="font-cormorant text-2xl text-[#2A2121] leading-relaxed mb-8">
+            <p className="font-cormorant text-2xl text-aether-dark leading-relaxed mb-8">
               No app to download. No account to create. Just tap and verify.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={900}>
-            <p className="font-cormorant text-2xl text-[#2A2121] leading-relaxed mb-16">
+            <p className="font-cormorant text-2xl text-aether-dark leading-relaxed mb-16">
               The record is{' '}
               <Tooltip content="Protected using advanced math that makes the data nearly impossible to fake or alter.">
-                <span className="text-[#BC8010] font-medium">cryptographically secured</span>
+                <span className="text-aether-gold font-medium">cryptographically secured</span>
               </Tooltip>
               . It can&apos;t be forged. It can&apos;t be lost. It stays with the art, always.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={1050}>
-            <p className="font-playfair text-xl text-[#B0B0B0] leading-relaxed mb-10">
+            <p className="font-playfair text-xl text-aether-gray leading-relaxed mb-10">
               Built for everyone in the art world:
             </p>
           </FadeInElement>
@@ -378,7 +378,7 @@ const Story = () => {
           </div>
           
           <FadeInElement delay={1800}>
-            <p className="font-playfair text-3xl text-[#2A2121] leading-relaxed font-medium">
+            <p className="font-playfair text-3xl text-aether-dark leading-relaxed font-medium">
               Your art&apos;s story, preserved. Permanently.
             </p>
           </FadeInElement>
@@ -390,80 +390,80 @@ const Story = () => {
         
         <section className="mb-32">
           <FadeInElement delay={0}>
-            <p className="font-playfair text-2xl text-[#BC8010] leading-relaxed mb-12 italic">
+            <p className="font-playfair text-2xl text-aether-gold leading-relaxed mb-12 italic">
               But we didn&apos;t stop at certificates.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={150}>
-            <p className="font-cormorant text-2xl text-[#2A2121] leading-relaxed mb-8">
+            <p className="font-cormorant text-2xl text-aether-dark leading-relaxed mb-8">
               Authentication is just the beginning.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={300}>
-            <p className="font-cormorant text-2xl text-[#2A2121] leading-relaxed mb-8">
+            <p className="font-cormorant text-2xl text-aether-dark leading-relaxed mb-8">
               Art doesn&apos;t exist in isolation. It moves between hands, across borders, through generations. It connects people.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={450}>
-            <p className="font-cormorant text-2xl text-[#2A2121] leading-relaxed mb-12">
+            <p className="font-cormorant text-2xl text-aether-dark leading-relaxed mb-12">
               We&apos;re building a place where those connections happen.
             </p>
           </FadeInElement>
           
           {/* Connection statements - group fade */}
           <FadeInElement delay={600} className="mb-12">
-            <div className="space-y-4 pl-6 border-l-2 border-[#B0B0B0]">
-              <p className="font-cormorant text-xl text-[#2A2121] leading-relaxed">
+            <div className="space-y-4 pl-6 border-l-2 border-aether-gray">
+              <p className="font-cormorant text-xl text-aether-dark leading-relaxed">
                 Artists discover galleries that believe in their work.
               </p>
-              <p className="font-cormorant text-xl text-[#2A2121] leading-relaxed">
+              <p className="font-cormorant text-xl text-aether-dark leading-relaxed">
                 Collectors find emerging talent before the world catches on.
               </p>
-              <p className="font-cormorant text-xl text-[#2A2121] leading-relaxed">
+              <p className="font-cormorant text-xl text-aether-dark leading-relaxed">
                 Dealers transact with confidence, knowing every piece is real.
               </p>
-              <p className="font-cormorant text-xl text-[#2A2121] leading-relaxed">
+              <p className="font-cormorant text-xl text-aether-dark leading-relaxed">
                 Galleries build relationships that last beyond a single sale.
               </p>
             </div>
           </FadeInElement>
           
           <FadeInElement delay={750}>
-            <p className="font-cormorant text-2xl text-[#BC8010] leading-relaxed mb-16">
+            <p className="font-cormorant text-2xl text-aether-gold leading-relaxed mb-16">
               Everyone linked. Everyone trusted.
             </p>
           </FadeInElement>
           
           {/* Poetic ending */}
           <FadeInElement delay={900}>
-            <p className="font-playfair text-2xl text-[#2A2121] leading-relaxed mb-6 italic">
+            <p className="font-playfair text-2xl text-aether-dark leading-relaxed mb-6 italic">
               Imagine an art world where proof is built in.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={1050}>
-            <p className="font-playfair text-2xl text-[#2A2121] leading-relaxed mb-6 italic">
+            <p className="font-playfair text-2xl text-aether-dark leading-relaxed mb-6 italic">
               Where every piece carries its story, wherever it goes.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={1200}>
-            <p className="font-playfair text-2xl text-[#2A2121] leading-relaxed mb-12 italic">
+            <p className="font-playfair text-2xl text-aether-dark leading-relaxed mb-12 italic">
               Where connection replaces doubt. And trust is the foundation.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={1350}>
-            <p className="font-playfair text-3xl text-[#2A2121] leading-relaxed font-medium mb-4">
+            <p className="font-playfair text-3xl text-aether-dark leading-relaxed font-medium mb-4">
               This is the future we&apos;re building.
             </p>
           </FadeInElement>
           
           <FadeInElement delay={1500}>
-            <p className="font-cormorant text-2xl text-[#BC8010] leading-relaxed mb-16">
+            <p className="font-cormorant text-2xl text-aether-gold leading-relaxed mb-16">
               We&apos;d love you to be part of it.
             </p>
           </FadeInElement>
@@ -479,47 +479,47 @@ const Story = () => {
               <form onSubmit={handleSubmit}>
                 <div className="space-y-6">
                   <div>
-                    <label className="font-libre text-sm text-[#2A2121] block mb-2">
+                    <label className="font-libre text-sm text-aether-dark block mb-2">
                       Name
                     </label>
                     <input
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="w-full px-4 py-3 border border-[#B0B0B0] rounded-lg
-                               font-cormorant text-lg text-[#2A2121]
-                               focus:outline-none focus:border-[#BC8010] transition-colors"
+                      className="w-full px-4 py-3 border border-aether-gray rounded-lg
+                               font-cormorant text-lg text-aether-dark
+                               focus:outline-none focus:border-aether-gold transition-colors"
                       placeholder="Your name"
                       required
                     />
                   </div>
                   
                   <div>
-                    <label className="font-libre text-sm text-[#2A2121] block mb-2">
+                    <label className="font-libre text-sm text-aether-dark block mb-2">
                       Email
                     </label>
                     <input
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="w-full px-4 py-3 border border-[#B0B0B0] rounded-lg
-                               font-cormorant text-lg text-[#2A2121]
-                               focus:outline-none focus:border-[#BC8010] transition-colors"
+                      className="w-full px-4 py-3 border border-aether-gray rounded-lg
+                               font-cormorant text-lg text-aether-dark
+                               focus:outline-none focus:border-aether-gold transition-colors"
                       placeholder="your@email.com"
                       required
                     />
                   </div>
                   
                   <div>
-                    <label className="font-libre text-sm text-[#2A2121] block mb-2">
+                    <label className="font-libre text-sm text-aether-dark block mb-2">
                       I am a...
                     </label>
                     <select
                       value={formData.role}
                       onChange={(e) => setFormData({...formData, role: e.target.value})}
-                      className="w-full px-4 py-3 border border-[#B0B0B0] rounded-lg
-                               font-cormorant text-lg text-[#2A2121]
-                               focus:outline-none focus:border-[#BC8010] transition-colors
+                      className="w-full px-4 py-3 border border-aether-gray rounded-lg
+                               font-cormorant text-lg text-aether-dark
+                               focus:outline-none focus:border-aether-gold transition-colors
                                bg-white cursor-pointer"
                       required
                     >
@@ -535,8 +535,8 @@ const Story = () => {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-4 bg-[#2A2121] text-white font-libre text-base
-                             rounded-lg hover:bg-[#BC8010] transition-colors duration-300
+                    className="w-full py-4 bg-aether-dark text-white font-libre text-base
+                             rounded-lg hover:bg-aether-gold transition-colors duration-300
                              mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? 'Joining...' : 'Join the waitlist'}
@@ -545,10 +545,10 @@ const Story = () => {
               </form>
             ) : (
               <div className="text-center py-12">
-                <p className="font-playfair text-2xl text-[#BC8010] mb-4">
+                <p className="font-playfair text-2xl text-aether-gold mb-4">
                   Welcome to the future.
                 </p>
-                <p className="font-cormorant text-xl text-[#2A2121]">
+                <p className="font-cormorant text-xl text-aether-dark">
                   We&apos;ll be in touch soon.
                 </p>
             </div>
