@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
-// import Image from 'next/image'
+import Image from 'next/image'
 import { Heart } from 'lucide-react';
 
 // Animated element that fades in on scroll
@@ -134,15 +134,15 @@ const Vision = () => {
                 {/* GIF Animation Placeholder */}
                 <FadeInElement delay={400} className="mb-16 md:mb-20">
                     <div className="relative w-full max-w-3xl mx-auto">
-                        {/* 
-                            =====================================================
+                        
+                            {/* =====================================================
                             GIF PLACEHOLDER
                             =====================================================
                             Replace the placeholder below with your GIF.
                             
-                            Option 1: Using Next.js Image (recommended for optimization)
+                            Option 1: Using Next.js Image (recommended for optimization) */}
                             <Image 
-                                src="/path-to-your-animation.gif"
+                                src="/aetherlabs-diagram-animated.svg"
                                 alt="AetherLabs connecting Artists, Galleries, Dealers, and Collectors"
                                 width={800}
                                 height={600}
@@ -150,17 +150,17 @@ const Vision = () => {
                                 unoptimized={true}  // Required for GIFs
                             />
                             
-                            Option 2: Using standard img tag
+                            {/* Option 2: Using standard img tag
                             <img 
                                 src="/path-to-your-animation.gif"
                                 alt="AetherLabs connecting Artists, Galleries, Dealers, and Collectors"
                                 className="w-full h-auto rounded-2xl"
                             />
-                            =====================================================
-                        */}
+                            ===================================================== */}
+                       
 
                         {/* Placeholder container - remove this when adding your GIF */}
-                        <div className="aspect-video bg-gradient-to-br from-aether-gold/10 to-aether-terracotta/10 
+                        {/* <div className="aspect-video bg-gradient-to-br from-aether-gold/10 to-aether-terracotta/10 
                                       rounded-2xl border-2 border-dashed border-aether-gold/30
                                       flex flex-col items-center justify-center p-8">
                             <div className="w-16 h-16 rounded-full bg-aether-gold/20 flex items-center justify-center mb-4">
@@ -175,7 +175,7 @@ const Vision = () => {
                             <p className="font-cormorant text-sm text-aether-gray text-center max-w-md">
                                 GIF showing Artists, Galleries, Dealers, and Collectors connected through AetherLabs
                             </p>
-                        </div>
+                        </div> */}
                     </div>
                 </FadeInElement>
 
