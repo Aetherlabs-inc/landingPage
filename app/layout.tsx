@@ -22,7 +22,7 @@ export const metadata: Metadata = {
         'art collection management',
         'AetherLabs',
         'art security',
-        'blockchain art',
+        'secure art certificates',
         'art authentication platform'
     ],
     authors: [{ name: 'AetherLabs Inc.' }],

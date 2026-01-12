@@ -17,7 +17,7 @@ export const metadata: Metadata = {
         'art collection management',
         'AetherLabs',
         'art security',
-        'blockchain art',
+        'secure art certificates',
         'art authentication platform',
         'art authentication service',
         'verify artwork',

@@ -24,8 +24,8 @@ const ComingSoon: React.FC = () => {
         },
         {
             id: 'blockchain-verification',
-            title: 'Blockchain Verification',
-            description: 'Immutable blockchain-based certificate verification system for artwork authenticity and ownership.',
+            title: 'Secure Certificate Verification',
+            description: 'Cryptographically secured certificate verification system with tamper-proof digital records for artwork authenticity and ownership.',
             icon: <Shield className="h-6 w-6" />,
             status: 'in-development',
             estimatedDate: 'Q3 2024'

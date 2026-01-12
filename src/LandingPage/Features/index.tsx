@@ -15,9 +15,9 @@ const Features = () => {
 
     const features = [
         {
-            title: "Blockchain Security",
-            description: "Every certificate is stored on Polygon blockchain—tamper-proof and permanent.",
-            expandedDescription: "Your artwork's authenticity is guaranteed forever with blockchain technology. Every certificate is stored permanently on the Polygon blockchain, ensuring tamper-proof verification. All transactions are publicly verifiable while maintaining artist privacy. Military-grade cryptography protects your digital certificates.",
+            title: "Secure Digital Certificates",
+            description: "Every certificate is cryptographically secured—tamper-proof and permanent.",
+            expandedDescription: "Your artwork's authenticity is guaranteed forever with secure digital certificates. Every certificate is stored permanently in tamper-proof digital records, ensuring permanent cloud storage. All records are cryptographically secured while maintaining artist privacy. Military-grade cryptography protects your digital certificates.",
             icon: (
                 <Layers size={24} className="text-cosmic-accent" />
             )
@@ -25,7 +25,7 @@ const Features = () => {
         {
             title: "NFC Technology",
             description: "Tap any smartphone to instantly verify—no app download required.",
-            expandedDescription: "Simple tap verification works with any NFC-enabled smartphone. No apps to download, no QR codes to scan—just tap and verify instantly. The NFC tags are water-resistant, tamper-evident, and work through glass and frames. Each tag is cryptographically linked to your blockchain certificate.",
+            expandedDescription: "Simple tap verification works with any NFC-enabled smartphone. No apps to download, no QR codes to scan—just tap and verify instantly. The NFC tags are water-resistant, tamper-evident, and work through glass and frames. Each tag is cryptographically linked to your secure digital certificate.",
             icon: (
                 <Grid3x3 size={24} className="text-cosmic-accent" />
             )
@@ -33,7 +33,7 @@ const Features = () => {
         {
             title: "Provenance Tracking",
             description: "Complete ownership history automatically recorded forever.",
-            expandedDescription: "Build trust with complete transparency. Every sale, transfer, and exhibition is automatically documented on the blockchain. Track your artwork's journey from creation to current owner. Provenance records increase value and authenticity for collectors and galleries.",
+            expandedDescription: "Build trust with complete transparency. Every sale, transfer, and exhibition is automatically documented in tamper-proof digital records. Track your artwork's journey from creation to current owner. Provenance records increase value and authenticity for collectors and galleries.",
             icon: (
                 <LayoutDashboard size={24} className="text-cosmic-accent" />
             )
@@ -41,15 +41,15 @@ const Features = () => {
         {
             title: "Digital Portfolio",
             description: "Showcase your collection with beautiful online galleries.",
-            expandedDescription: "Create stunning online portfolios that showcase your authenticated works. Share with collectors, galleries, or keep private. Professional presentation with customizable layouts and high-resolution image support. Each artwork links directly to its blockchain certificate for instant verification.",
+            expandedDescription: "Create stunning online portfolios that showcase your authenticated works. Share with collectors, galleries, or keep private. Professional presentation with customizable layouts and high-resolution image support. Each artwork links directly to its secure digital certificate for instant verification.",
             icon: (
                 <ListCheck size={24} className="text-cosmic-accent" />
             )
         },
         {
             title: "Easy Transfers",
-            description: "Transfer ownership in seconds with built-in smart contracts.",
-            expandedDescription: "Streamline your sales process with blockchain-powered transfers. No paperwork, no delays—ownership transfers complete in seconds. Smart contracts handle the entire process transparently and securely. Complete provenance history transfers with the artwork automatically.",
+            description: "Transfer ownership in seconds with cryptographically secured records.",
+            expandedDescription: "Streamline your sales process with cryptographically secured transfers. No paperwork, no delays—ownership transfers complete in seconds. Our secure system handles the entire process transparently and securely. Complete provenance history transfers with the artwork automatically.",
             icon: (
                 <Star size={24} className="text-cosmic-accent" />
             )
@@ -123,7 +123,7 @@ const Features = () => {
                         Join Waitlist - Get Early Access
                     </Button>
                     <p className="text-sm text-muted-foreground">
-                        Unlock all features with founding member pricing. Limited spots available.
+                        Unlock all features with early access pricing. Contact us for details.
                     </p>
                 </div>
             </div>

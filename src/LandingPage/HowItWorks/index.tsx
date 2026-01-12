@@ -7,11 +7,11 @@ const HowItWorks = () => {
         {
             icon: <Upload className="h-8 w-8 text-primary" />,
             title: "Step 1: Register Your Artwork",
-            description: "Upload high-resolution images, artwork details, and artist information. Our system generates a unique digital certificate stored permanently on the blockchain.",
+            description: "Upload high-resolution images, artwork details, and artist information. Our system generates a unique secure digital certificate stored permanently in tamper-proof digital records.",
             bullets: [
                 "Accepts JPG, PNG, TIFF formats",
                 "Certificate created in under 2 minutes",
-                "Immutable blockchain record"
+                "Cryptographically secured permanent record"
             ]
         },
         {
@@ -81,7 +81,7 @@ const HowItWorks = () => {
                     </p>
                     <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
                         <CheckCircle className="h-4 w-4 text-primary" />
-                        <span>Transparent and secure system with all certificates recorded permanently on blockchain</span>
+                        <span>Transparent and secure system with all certificates recorded permanently in tamper-proof digital records</span>
                     </div>
                 </div>
             </div>

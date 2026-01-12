@@ -10,11 +10,7 @@ const FAQ = () => {
     const faqs = [
         {
             question: "What happens if the NFC tag is damaged or removed?",
-            answer: "Your artwork's certificate remains permanently on the blockchain regardless of the physical tag. We can send replacement tags that link to the same certificate. The blockchain record includes tag replacement history for complete transparency."
-        },
-        {
-            question: "Which blockchain do you use and why?",
-            answer: "We use Polygon (a layer-2 Ethereum solution) for its security, low costs, and environmental sustainability. Each certificate costs pennies to mint, and transactions are 99% more energy-efficient than traditional Ethereum."
+            answer: "Your artwork's secure digital certificate remains permanently stored in our tamper-proof digital records regardless of the physical tag. We can send replacement tags that link to the same certificate. The permanent cloud storage includes tag replacement history for complete transparency."
         },
         {
             question: "Do buyers need an app to verify authenticity?",
@@ -22,7 +18,7 @@ const FAQ = () => {
         },
         {
             question: "Can I transfer ownership when I sell my artwork?",
-            answer: "Absolutely. Ownership transfers are built into the system. You can transfer via email invitation, and the new owner gets full access while the complete provenance history remains visible on the blockchain."
+            answer: "Absolutely. Ownership transfers are built into the system. You can transfer via email invitation, and the new owner gets full access while the complete provenance history remains visible in our permanent cloud storage."
         },
         {
             question: "Is my artwork information private?",
@@ -34,7 +30,7 @@ const FAQ = () => {
         },
         {
             question: "When will AetherLabs launch?",
-            answer: "We're planning to launch in Fall 2026. Waitlist members will get early access 2 weeks before public launch, plus exclusive founding member pricing. Join now to secure your spot - only 5,000 spots available!"
+            answer: "We're planning Early Access in 2026. Waitlist members will get early access before public launch, plus early access pricing. Be among the first to join!"
         },
         {
             question: "What if I have more questions?",

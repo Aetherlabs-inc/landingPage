@@ -22,7 +22,7 @@ const initialColumns: Column[] = [
             {
                 id: 't2',
                 title: "Mint authenticity certificate",
-                description: "Create blockchain-backed certificate for 'Lotus Study – RK-017'.",
+                description: "Create secure digital certificate for 'Lotus Study – RK-017'.",
                 tag: { color: 'purple', label: 'Certificate' },
                 dueDate: 'Sep 26',
                 assignees: 2,

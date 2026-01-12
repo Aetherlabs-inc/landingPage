@@ -88,7 +88,7 @@ const UseCases = () => {
                         Ready to protect your art journey?
                     </h3>
                     <p className="text-muted-foreground max-w-2xl mx-auto">
-                        Join artists, galleries, and collectors who are securing their artwork with blockchain authentication.
+                        Join artists, galleries, and collectors who are securing their artwork with secure digital certificates and tamper-proof digital records.
                     </p>
                     <Button
                         onClick={handleJoinWaitlist}

@@ -109,7 +109,7 @@ const Waitlist = () => {
                                 </li>
                                 <li className="flex items-start gap-2">
                                     <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                                    <span>Lock in founding member pricing (up to 50% off)</span>
+                                    <span>Early access pricing - contact for details</span>
                                 </li>
                                 <li className="flex items-start gap-2">
                                     <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
@@ -136,12 +136,12 @@ const Waitlist = () => {
                 <CardHeader className="text-center">
                     <div className="inline-block mx-auto mb-4 px-4 py-2 bg-muted rounded-full">
                         <span className="text-sm font-medium text-primary">
-                            Launching Fall 2026 - Limited Early Access Only 5,000 Spots Available!
+                            Early Access 2026 - Coming Soon
                         </span>
                     </div>
-                    <CardTitle className="text-3xl mb-2">Join the Aether Waitlist - Only 5,000 Spots Available!</CardTitle>
+                    <CardTitle className="text-3xl mb-2">Join the Aether Waitlist</CardTitle>
                     <CardDescription className="text-lg">
-                        Be among the first to authenticate your artwork with blockchain technology and secure your spot in the early access program.
+                        Be among the first to authenticate your artwork with secure digital certificates and tamper-proof digital records.
                     </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -204,8 +204,8 @@ const Waitlist = () => {
 
                             <div className="text-center space-y-2">
                                 <p className="text-sm text-muted-foreground">
-                                    ✓ Early access 2 weeks before launch<br />
-                                    ✓ Founding member pricing (up to 50% off)<br />
+                                    ✓ Early access before public launch<br />
+                                    ✓ Early access pricing - contact for details<br />
                                     ✓ No spam, unsubscribe anytime
                                 </p>
                             </div>

@@ -5,13 +5,11 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { ThemeSwitcher, ThemeSwitcherWithLabel } from '@/components/themeSwitcher';
 import Link from 'next/link';
 
 const Header = () => {
     const router = useRouter();
-    const [activePage, setActivePage] = useState('features');
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -30,15 +28,6 @@ const Header = () => {
         router.push('/waitlist');
     };
 
-    const handleNavClick = (page: string) => (e: React.MouseEvent) => {
-        e.preventDefault();
-        setActivePage(page);
-        const element = document.getElementById(page);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        }
-        setMobileMenuOpen(false);
-    };
 
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen);
@@ -79,29 +68,20 @@ const Header = () => {
 
                 {/* Desktop navigation */}
                 <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center md:flex">
-                    <div className="rounded-full border border-border/60 bg-background/80 px-1 py-1 shadow-lg backdrop-blur-md">
-                        <ToggleGroup type="single" value={activePage} onValueChange={(value) => value && setActivePage(value)}>
-                            <ToggleGroupItem
-                                value="features"
-                                className={cn(
-                                    "px-4 py-2 rounded-full transition-colors relative",
-                                    activePage === 'features' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                                )}
-                                onClick={handleNavClick('features')}
-                            >
-                                Features
-                            </ToggleGroupItem>
-                            <ToggleGroupItem
-                                value="pricing"
-                                className={cn(
-                                    "px-4 py-2 rounded-full transition-colors relative",
-                                    activePage === 'pricing' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                                )}
-                                onClick={handleNavClick('pricing')}
-                            >
-                                Pricing
-                            </ToggleGroupItem>
-                        </ToggleGroup>
+                    <div className="flex items-center gap-6">
+                        <Link 
+                            href="#story"
+                            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                        >
+                            The Aether Story
+                        </Link>
+                        <Button
+                            onClick={handleJoinWaitlist}
+                            variant="ghost"
+                            className="text-sm text-muted-foreground hover:text-foreground"
+                        >
+                            Join the Waitlist
+                        </Button>
                     </div>
                 </nav>
 
@@ -109,28 +89,13 @@ const Header = () => {
                 {mobileMenuOpen && (
                     <div className="absolute left-4 right-4 top-full z-50 mt-4 rounded-2xl border border-border/60 bg-background/95 px-6 py-4 shadow-xl backdrop-blur-md md:hidden">
                         <div className="flex flex-col gap-4">
-                            <a
-                                href="#features"
-                                className={`px-3 py-2 text-sm rounded-md transition-colors ${activePage === 'features' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                                    }`}
-                                onClick={handleNavClick('features')}
-                            >
-                                Features
-                            </a>
-                            <a
-                                href="#pricing"
-                                className={`px-3 py-2 text-sm rounded-md transition-colors ${activePage === 'pricing' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                                    }`}
-                                onClick={handleNavClick('pricing')}
-                            >
-                                Pricing
-                            </a>
-                            <a
-                                href="#"
+                            <Link
+                                href="#story"
                                 className="px-3 py-2 text-sm rounded-md transition-colors text-muted-foreground hover:text-foreground hover:bg-muted"
+                                onClick={() => setMobileMenuOpen(false)}
                             >
-                                FAQ
-                            </a>
+                                The Aether Story
+                            </Link>
 
                             {/* Add theme toggle for mobile */}
                             <ThemeSwitcherWithLabel />
@@ -142,7 +107,7 @@ const Header = () => {
                                 }}
                                 className="h-11 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90"
                             >
-                                Join Waitlist
+                                Join the Waitlist
                             </Button>
                         </div>
                     </div>
@@ -151,14 +116,6 @@ const Header = () => {
                 <div className="hidden md:flex items-center gap-4">
                     {/* Theme toggle for desktop */}
                     <ThemeSwitcher />
-                    <div className="rounded-2xl">
-                        <Button
-                            onClick={handleJoinWaitlist}
-                            className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl"
-                        >
-                            Join Waitlist
-                        </Button>
-                    </div>
                 </div>
             </div>
         </header>
