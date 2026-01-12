@@ -1,44 +1,36 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Footer = () => {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="w-full py-16 px-6 md:px-12 bg-white border-t border-aether-gray/20">
-            <div className="max-w-6xl mx-auto">
-                <div className="flex flex-col items-center space-y-10">
-                    {/* Logo */}
-                    <div className="flex items-center gap-3">
-                        <span className="inline-flex h-12 w-12 items-center justify-center rounded-md bg-aether-dark text-white font-libre font-semibold text-xl">
+        <footer className="w-full py-12 px-6 md:px-12 bg-white">
+            <div className="max-w-5xl mx-auto">
+                <div className="flex flex-col items-center space-y-8">
+
+                    {/* Logo - smaller, lighter */}
+                    <Link href="/" className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                        <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-aether-dark text-white font-playfair text-sm">
                             Æ
                         </span>
-                        <span className="text-xl font-libre font-medium tracking-tight text-aether-dark">AetherLabs</span>
-                    </div>
+                        <span className="font-playfair text-base tracking-tight text-aether-dark">
+                            AetherLabs
+                        </span>
+                    </Link>
 
-                    {/* Legal links */}
-                    <div className="flex flex-wrap items-center justify-center gap-6 font-cormorant text-lg text-aether-gray">
-                        <a href="/terms" className="hover:text-aether-dark transition-colors">
-                            Terms and Conditions
-                        </a>
-                        <span className="text-aether-gray">•</span>
-                        <a href="/privacy" className="hover:text-aether-dark transition-colors">
-                            Privacy and Cookie Policy
-                        </a>
-                        <span className="text-aether-gray">•</span>
-                        <span className="font-libre">AetherLabs, Inc. ©{year}</span>
-                    </div>
-
-                    {/* Social links */}
-                    <div className="flex items-center gap-6 pt-4">
+                    {/* Social links - subtle */}
+                    <div className="flex items-center gap-4">
                         <a
                             href="https://x.com/aetherlabs"
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="AetherLabs on X"
-                            className="h-10 w-10 rounded-full border border-aether-gray/30 flex items-center justify-center text-aether-gray hover:text-aether-gold hover:border-aether-gold/50 transition-all"
+                            className="h-9 w-9 rounded-full flex items-center justify-center text-aether-gray/60 
+                                     hover:text-aether-gold transition-colors"
                         >
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-                                <path d="M23 3.01s-2.018 1.192-3.14 1.53a4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4.01s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5 0-.278-.028-.556-.08-.83C21.94 5.674 23 3.01 23 3.01z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                             </svg>
                         </a>
                         <a
@@ -46,14 +38,53 @@ const Footer = () => {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label="AetherLabs on Instagram"
-                            className="h-10 w-10 rounded-full border border-aether-gray/30 flex items-center justify-center text-aether-gray hover:text-aether-gold hover:border-aether-gold/50 transition-all"
+                            className="h-9 w-9 rounded-full flex items-center justify-center text-aether-gray/60 
+                                     hover:text-aether-gold transition-colors"
                         >
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-                                <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="2" />
-                                <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" />
-                                <circle cx="17" cy="7" r="1.2" fill="currentColor" />
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                                <rect x="2" y="2" width="20" height="20" rx="5" />
+                                <circle cx="12" cy="12" r="4" />
+                                <circle cx="18" cy="6" r="1.5" fill="currentColor" stroke="none" />
                             </svg>
                         </a>
+                        <a
+                            href="https://linkedin.com/company/aetherlabs"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="AetherLabs on LinkedIn"
+                            className="h-9 w-9 rounded-full flex items-center justify-center text-aether-gray/60 
+                                     hover:text-aether-gold transition-colors"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="w-16 h-[1px] bg-aether-gray/20" />
+
+                    {/* Legal links and copyright - very subtle */}
+                    <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6 text-sm">
+                        <div className="flex items-center gap-4 font-cormorant text-aether-gray/50">
+                            <Link
+                                href="/terms"
+                                className="hover:text-aether-dark transition-colors"
+                            >
+                                Terms
+                            </Link>
+                            <span className="text-aether-gray/30">·</span>
+                            <Link
+                                href="/privacy"
+                                className="hover:text-aether-dark transition-colors"
+                            >
+                                Privacy
+                            </Link>
+                        </div>
+                        <span className="hidden md:inline text-aether-gray/30">·</span>
+                        <span className="font-cormorant text-aether-gray/40">
+                            © {year} AetherLabs
+                        </span>
                     </div>
                 </div>
             </div>

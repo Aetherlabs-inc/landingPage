@@ -19,7 +19,7 @@ const Problem = () => {
             icon: <Globe size={40} className="text-aether-gold" />,
             title: "Lost in Translation",
             description:
-                "Your art travels the world, but documentation doesn't. After decades of sales and transfers, the paper trail goes cold—and your artwork's legitimacy dies with it.",
+                "Your art travels the world, but documentation doesn't. After decades of sales and transfers, the paper trail goes cold, and your artwork's legitimacy dies with it.",
         },
     ];
 

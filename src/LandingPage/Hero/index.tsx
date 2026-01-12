@@ -1,227 +1,132 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 
 const Hero = () => {
     const router = useRouter();
-    const [isVisible, setIsVisible] = useState(false);
-    const heroRef = useRef<HTMLDivElement>(null);
+    const [visibleLines, setVisibleLines] = useState<number[]>([]);
 
     useEffect(() => {
-        setIsVisible(true);
+        // Stagger the appearance of each line
+        const delays = [200, 600, 1000, 1400, 1800];
+        delays.forEach((delay, index) => {
+            setTimeout(() => {
+                setVisibleLines(prev => [...prev, index]);
+            }, delay);
+        });
     }, []);
 
     const handleJoinWaitlist = () => {
         router.push('/waitlist');
     };
 
-    // Art images with static positions
-    // Using placeholder images - replace with actual artwork images later
-    const artImages = [
-        {
-            src: '/IMG_6262-2.JPG',
-            alt: 'Artwork 1',
-            delay: 0.3,
-            size: 'w-64 h-96 md:h-[35rem] md:w-[48rem]',
-            floatDuration: 6,
-            position: { top: '25%', left: '18%' } // Top left, slightly to the right
-        },
-        {
-            src: '/IMG_8423-2.JPG',
-            alt: 'Artwork 2',
-            delay: 0.5,
-            size: 'w-64 h-96 md:w-[38rem] md:h-[48rem]',
-            floatDuration: 7,
-            position: { top: '50%', left: '80%' } // Center right
-        },
-        {
-            src: '/IMG_8591-2.JPG',
-            alt: 'Artwork 3',
-            delay: 0.7,
-            size: 'w-64 h-96 md:h-[28rem] md:w-[38rem]',
-            floatDuration: 6.5,
-            position: { top: '70%', left: '20%' } // Bottom left, offset from top
-        }
-    ];
+    const isVisible = (index: number) => visibleLines.includes(index);
 
     return (
-        <div ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
-            {/* Subtle overlay pattern */}
-            <div className="absolute inset-0 opacity-20">
-                <div className="absolute inset-0" style={{
-                    backgroundImage: `radial-gradient(circle at 1px 1px, rgba(42,33,33,0.05) 1px, transparent 0)`,
-                    backgroundSize: '50px 50px'
-                }} />
-            </div>
-
-            {/* Animation styles */}
-            <style>{`
-        @keyframes fadeInUp {
-          from { 
-            opacity: 0; 
-            transform: translateY(30px); 
-          }
-          to { 
-            opacity: 1; 
-            transform: translateY(0); 
-          }
-        }
-        
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-20px);
-          }
-        }
-        
-        @keyframes fadeInScale {
-          from {
-            opacity: 0;
-            transform: scale(0.9);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-        
-        @keyframes shimmer {
-          0% {
-            background-position: -1000px 0;
-          }
-          100% {
-            background-position: 1000px 0;
-          }
-        }
-        
-        .hero-fade-in {
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
-        
-        .art-shadow {
-          box-shadow: 0 25px 80px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
-        }
-        
-        .button-glow {
-          box-shadow: 0 4px 20px rgba(188, 128, 16, 0.3), 0 0 40px rgba(188, 128, 16, 0.1);
-        }
-      `}</style>
-
-            {/* Background decorative elements */}
-            <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-aether-gold/5 rounded-full blur-3xl" />
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-aether-terracotta/5 rounded-full blur-3xl" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-aether-gold/3 rounded-full blur-3xl" />
-            </div>
-
-            {/* Art Images with animations */}
-            {artImages.map((art, index) => (
+        <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-white">
+            {/* Subtle texture overlay */}
+            <div className="absolute inset-0 opacity-30">
                 <div
-                    key={index}
-                    className="absolute hidden lg:block pointer-events-none z-10"
+                    className="absolute inset-0"
                     style={{
-                        top: art.position.top,
-                        left: art.position.left,
-                        transform: 'translate(-50%, -50%)',
+                        backgroundImage: `radial-gradient(circle at 1px 1px, rgba(42,33,33,0.03) 1px, transparent 0)`,
+                        backgroundSize: '40px 40px'
                     }}
-                >
-                    <div
-                        className={`${art.size} relative art-shadow rounded-lg overflow-hidden bg-white border border-gray-200`}
-                        style={{
-                            animation: `float ${art.floatDuration}s ease-in-out infinite ${art.delay}s, fadeInScale 1s ease-out forwards ${art.delay}s`,
-                        }}
-                    >
-                        <Image
-                            src={art.src}
-                            alt={art.alt}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 1024px) 0px, 384px"
-                            priority={index < 2}
-                            unoptimized={art.src.startsWith('https://placehold.co')}
-                        />
-                    </div>
-                </div>
-            ))}
+                />
+            </div>
 
-            <div className="relative max-w-5xl mx-auto px-6 py-24 text-center z-20">
-                {/* Main Headline */}
-                <div
-                    className={`hero-fade-in ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-                    style={{ animationDelay: '0.2s' }}
-                >
-                    <h1 className="font-playfair text-5xl md:text-6xl lg:text-7xl text-aether-dark leading-tight mb-6 font-medium">
-                        Your art&apos;s story,
-                        <br />
-                        <span className="text-aether-gold italic">preserved permanently</span>
-                    </h1>
-                </div>
+            {/* Soft gradient accents */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-1/4 left-1/3 w-[500px] h-[500px] bg-aether-gold/5 rounded-full blur-3xl" />
+                <div className="absolute bottom-1/3 right-1/3 w-[400px] h-[400px] bg-aether-terracotta/3 rounded-full blur-3xl" />
+            </div>
 
-                {/* Subheadline */}
-                <div
-                    className={`hero-fade-in ${isVisible ? 'opacity-100' : 'opacity-0'} mb-12`}
-                    style={{ animationDelay: '0.4s' }}
+            {/* Content */}
+            <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
+
+                {/* Line 1 */}
+                <p
+                    className={`font-cormorant text-3xl md:text-4xl lg:text-5xl text-aether-dark leading-relaxed mb-6
+                               transition-all duration-700 ease-out
+                               ${isVisible(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
                 >
-                    <p className="font-cormorant text-2xl md:text-3xl text-aether-dark leading-relaxed max-w-3xl mx-auto mb-4">
-                        A digital certificate of authenticity that lives with your art.
-                    </p>
-                    <p className="font-cormorant text-xl md:text-2xl text-aether-gray leading-relaxed max-w-2xl mx-auto">
-                        Not in a drawer. Not in a folder. With the piece itself.
-                    </p>
-                </div>
+                    Every piece of art carries a story.
+                </p>
+
+                {/* Line 2 */}
+                <p
+                    className={`font-cormorant text-xl md:text-2xl text-aether-gray leading-relaxed mb-8
+                               transition-all duration-700 ease-out
+                               ${isVisible(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                >
+                    Who made it. Who owned it. Where it has been.
+                </p>
+
+                {/* Line 3 - with provenance tooltip */}
+                <p
+                    className={`font-cormorant text-xl md:text-2xl text-aether-dark leading-relaxed mb-8
+                               transition-all duration-700 ease-out
+                               ${isVisible(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                >
+                    This is called{' '}
+                    <span className="relative inline-block group">
+                        <span className="text-aether-gold font-medium border-b border-dotted border-aether-gold cursor-help">
+                            provenance
+                        </span>
+                        {/* Tooltip */}
+                        <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 px-4 py-3
+                                        bg-aether-dark text-white text-base rounded-lg shadow-xl
+                                        min-w-[280px] text-center z-50 font-cormorant leading-relaxed
+                                        opacity-0 group-hover:opacity-100 transition-opacity duration-200
+                                        pointer-events-none">
+                            The documented history of an artwork - who created it, who owned it, and how it changed hands over time.
+                            <span className="absolute top-full left-1/2 -translate-x-1/2 
+                                           border-8 border-transparent border-t-aether-dark" />
+                        </span>
+                    </span>
+                    {' '}- the chain of ownership that follows a piece through time.
+                </p>
+
+                {/* Line 4 */}
+                <p
+                    className={`font-playfair text-2xl md:text-3xl text-aether-dark leading-relaxed mb-12 font-medium
+                               transition-all duration-700 ease-out
+                               ${isVisible(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+                >
+                    We built AetherLabs to protect it.
+                </p>
 
                 {/* CTA Button */}
                 <div
-                    className={`hero-fade-in ${isVisible ? 'opacity-100' : 'opacity-0'} mb-16`}
-                    style={{ animationDelay: '0.6s' }}
+                    className={`transition-all duration-700 ease-out
+                               ${isVisible(4) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
                 >
                     <button
                         onClick={handleJoinWaitlist}
-                        className="inline-block px-8 py-4 bg-aether-dark text-white font-libre text-lg rounded-lg 
-                     hover:bg-aether-gold hover:text-white transition-all duration-300 transform hover:scale-105
-                     shadow-lg hover:shadow-xl button-glow"
+                        className="inline-block px-8 py-4 bg-aether-dark text-white font-libre text-lg
+                                 rounded-lg hover:bg-aether-gold transition-colors duration-300
+                                 shadow-lg hover:shadow-xl"
                     >
                         Join the waitlist
                     </button>
                 </div>
-
-                {/* Feature highlights */}
-                <div
-                    className={`hero-fade-in ${isVisible ? 'opacity-100' : 'opacity-0'} grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto`}
-                    style={{ animationDelay: '0.8s' }}
-                >
-                    <div className="text-center">
-                        <div className="font-libre text-3xl text-aether-gold mb-2">NFC</div>
-                        <p className="font-cormorant text-lg text-aether-gray">
-                            Tap to verify
-                        </p>
-                    </div>
-                    <div className="text-center">
-                        <div className="font-libre text-3xl text-aether-gold mb-2">Secure</div>
-                        <p className="font-cormorant text-lg text-aether-gray">
-                            Cryptographically protected
-                        </p>
-                    </div>
-                    <div className="text-center">
-                        <div className="font-libre text-3xl text-aether-gold mb-2">Permanent</div>
-                        <p className="font-cormorant text-lg text-aether-gray">
-                            Always with the art
-                        </p>
-                    </div>
-                </div>
             </div>
 
             {/* Scroll indicator */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-                <div className="w-6 h-10 border-2 border-aether-gray rounded-full flex justify-center">
-                    <div className="w-1 h-3 bg-aether-gray rounded-full mt-2 animate-bounce" />
+            <div
+                className={`absolute bottom-10 left-1/2 -translate-x-1/2 z-20
+                           transition-all duration-700 ease-out delay-500
+                           ${isVisible(4) ? 'opacity-100' : 'opacity-0'}`}
+            >
+                <div className="flex flex-col items-center gap-2">
+                    <span className="font-libre text-sm text-aether-gray tracking-wide">Scroll</span>
+                    <div className="w-6 h-10 border-2 border-aether-gray/50 rounded-full flex justify-center">
+                        <div className="w-1 h-3 bg-aether-gray/50 rounded-full mt-2 animate-bounce" />
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 
