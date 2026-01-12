@@ -10,11 +10,7 @@ const FAQ = () => {
     const faqs = [
         {
             question: "What happens if the NFC tag is damaged or removed?",
-            answer: "Your artwork's certificate remains permanently on the blockchain regardless of the physical tag. We can send replacement tags that link to the same certificate. The blockchain record includes tag replacement history for complete transparency."
-        },
-        {
-            question: "Which blockchain do you use and why?",
-            answer: "We use Polygon (a layer-2 Ethereum solution) for its security, low costs, and environmental sustainability. Each certificate costs pennies to mint, and transactions are 99% more energy-efficient than traditional Ethereum."
+            answer: "Your artwork's secure digital certificate remains permanently stored in our tamper-proof digital records regardless of the physical tag. We can send replacement tags that link to the same certificate. The permanent cloud storage includes tag replacement history for complete transparency."
         },
         {
             question: "Do buyers need an app to verify authenticity?",
@@ -22,7 +18,7 @@ const FAQ = () => {
         },
         {
             question: "Can I transfer ownership when I sell my artwork?",
-            answer: "Absolutely. Ownership transfers are built into the system. You can transfer via email invitation, and the new owner gets full access while the complete provenance history remains visible on the blockchain."
+            answer: "Absolutely. Ownership transfers are built into the system. You can transfer via email invitation, and the new owner gets full access while the complete provenance history remains visible in our permanent cloud storage."
         },
         {
             question: "Is my artwork information private?",
@@ -34,7 +30,7 @@ const FAQ = () => {
         },
         {
             question: "When will AetherLabs launch?",
-            answer: "We're planning to launch in Fall 2026. Waitlist members will get early access 2 weeks before public launch, plus exclusive founding member pricing. Join now to secure your spot - only 5,000 spots available!"
+            answer: "We're planning Early Access in 2026. Waitlist members will get early access before public launch, plus early access pricing. Be among the first to join!"
         },
         {
             question: "What if I have more questions?",
@@ -43,21 +39,21 @@ const FAQ = () => {
     ];
 
     return (
-        <section className="w-full py-20 px-6 md:px-12 bg-muted/30">
+        <section className="w-full py-20 px-6 md:px-12 bg-white">
             <div className="max-w-4xl mx-auto space-y-12">
                 <div className="text-center space-y-4">
-                    <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-foreground">
+                    <h2 className="font-playfair text-3xl md:text-4xl font-medium tracking-tight text-aether-dark">
                         Frequently Asked Questions
                     </h2>
                 </div>
 
                 <Accordion type="single" collapsible className="w-full">
                     {faqs.map((faq, index) => (
-                        <AccordionItem key={index} value={`item-${index}`} className="border-border">
-                            <AccordionTrigger className="text-left text-lg font-medium text-foreground hover:text-primary">
+                        <AccordionItem key={index} value={`item-${index}`} className="border-aether-gray/30">
+                            <AccordionTrigger className="text-left text-lg font-libre font-medium text-aether-dark hover:text-aether-gold">
                                 {faq.question}
                             </AccordionTrigger>
-                            <AccordionContent className="text-muted-foreground leading-relaxed">
+                            <AccordionContent className="font-cormorant text-lg text-aether-gray leading-relaxed">
                                 {faq.answer}
                             </AccordionContent>
                         </AccordionItem>

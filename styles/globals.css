@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,33 +7,33 @@
 
 @layer base {
   :root {
-    --background: 0 0% 98%; /* Very light grey */
-    --foreground: 0 0% 20%; /* Dark grey */
+    --background: 0 0% 100%; /* White */
+    --foreground: 0 12% 15%; /* Aether dark #2A2121 */
 
-    --card: 0 0% 96%; /* Light grey card */
-    --card-foreground: 0 0% 20%;
+    --card: 0 0% 100%; /* White card */
+    --card-foreground: 0 12% 15%; /* Aether dark */
 
-    --popover: 0 0% 96%;
-    --popover-foreground: 0 0% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 12% 15%;
 
-    --primary: 0 0% 25%; /* Dark grey primary */
-    --primary-foreground: 0 0% 98%; /* Very light grey */
+    --primary: 0 12% 15%; /* Aether dark #2A2121 */
+    --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 0 0% 92%; /* Light grey secondary */
-    --secondary-foreground: 0 0% 25%;
+    --secondary: 0 0% 92%; /* Light grey */
+    --secondary-foreground: 0 12% 15%; /* Aether dark */
 
-    --muted: 0 0% 88%; /* Medium light grey */
-    --muted-foreground: 0 0% 45%; /* Medium grey */
+    --muted: 0 0% 69%; /* Aether gray #B0B0B0 */
+    --muted-foreground: 0 12% 15%; /* Aether dark */
 
-    --accent: 0 0% 25%; /* Dark grey accent */
-    --accent-foreground: 0 0% 98%;
+    --accent: 36 84% 40%; /* Aether gold #BC8010 */
+    --accent-foreground: 0 0% 100%; /* White */
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 18 65% 48%; /* Aether terracotta #CA5B2B */
+    --destructive-foreground: 0 0% 100%;
 
     --border: 0 0% 85%; /* Light grey border */
     --input: 0 0% 90%;
-    --ring: 0 0% 25%; /* Dark grey ring */
+    --ring: 36 84% 40%; /* Aether gold */
 
     --radius: 0.5rem;
   }
@@ -77,7 +78,8 @@
   }
 
   ::selection {
-    @apply bg-primary text-primary-foreground;
+    background: #BC8010;
+    color: white;
   }
 
   .cosmic-gradient {

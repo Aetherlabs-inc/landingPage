@@ -1,130 +1,90 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Footer = () => {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="w-full py-16 px-6 md:px-12 border-t border-border bg-card">
-            <div className="max-w-7xl mx-auto">
-                <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
-                    {/* Brand + blurb */}
-                    <div className="md:col-span-2 space-y-6">
-                        {/* Simple logomark placeholder: swap with your SVG */}
-                        <div className="inline-flex items-center gap-2">
-                            <span
-                                aria-label="AetherLabs"
-                                className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-foreground text-background font-semibold tracking-tight"
+        <footer className="w-full py-12 px-6 md:px-12 bg-white">
+            <div className="max-w-5xl mx-auto">
+                <div className="flex flex-col items-center space-y-8">
+
+                    {/* Logo - smaller, lighter */}
+                    <Link href="/" className="flex items-center gap-2 opacity-70 hover:opacity-100 transition-opacity">
+                        <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-aether-dark text-white font-playfair text-sm">
+                            Æ
+                        </span>
+                        <span className="font-playfair text-base tracking-tight text-aether-dark">
+                            AetherLabs
+                        </span>
+                    </Link>
+
+                    {/* Social links - subtle */}
+                    <div className="flex items-center gap-4">
+                        <a
+                            href="https://x.com/aetherlabs"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="AetherLabs on X"
+                            className="h-9 w-9 rounded-full flex items-center justify-center text-aether-gray/60 
+                                     hover:text-aether-gold transition-colors"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                        <a
+                            href="https://instagram.com/aetherlabs"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="AetherLabs on Instagram"
+                            className="h-9 w-9 rounded-full flex items-center justify-center text-aether-gray/60 
+                                     hover:text-aether-gold transition-colors"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                                <rect x="2" y="2" width="20" height="20" rx="5" />
+                                <circle cx="12" cy="12" r="4" />
+                                <circle cx="18" cy="6" r="1.5" fill="currentColor" stroke="none" />
+                            </svg>
+                        </a>
+                        <a
+                            href="https://linkedin.com/company/aetherlabs"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="AetherLabs on LinkedIn"
+                            className="h-9 w-9 rounded-full flex items-center justify-center text-aether-gray/60 
+                                     hover:text-aether-gold transition-colors"
+                        >
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="w-16 h-[1px] bg-aether-gray/20" />
+
+                    {/* Legal links and copyright - very subtle */}
+                    <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6 text-sm">
+                        <div className="flex items-center gap-4 font-cormorant text-aether-gray/50">
+                            <Link
+                                href="/terms"
+                                className="hover:text-aether-dark transition-colors"
                             >
-                                Æ
-                            </span>
-                            <span className="text-xl font-medium tracking-tight text-foreground">AetherLabs</span>
+                                Terms
+                            </Link>
+                            <span className="text-aether-gray/30">·</span>
+                            <Link
+                                href="/privacy"
+                                className="hover:text-aether-dark transition-colors"
+                            >
+                                Privacy
+                            </Link>
                         </div>
-
-                        <p className="text-muted-foreground max-w-xs">
-                            Modern art authentication and management
-                        </p>
-
-                        {/* Socials */}
-                        <div className="flex items-center gap-4">
-                            <a
-                                href="#"
-                                aria-label="AetherLabs on X (Twitter)"
-                                className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                            >
-                                {/* X / Twitter */}
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-                                    <path d="M23 3.01s-2.018 1.192-3.14 1.53a4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4.01s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5 0-.278-.028-.556-.08-.83C21.94 5.674 23 3.01 23 3.01z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </a>
-                            <a
-                                href="#"
-                                aria-label="AetherLabs on LinkedIn"
-                                className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                            >
-                                {/* LinkedIn */}
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M2 9h4v12H2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                    <circle cx="4" cy="4" r="2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </a>
-                            <a
-                                href="#"
-                                aria-label="AetherLabs on Instagram"
-                                className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                            >
-                                {/* Instagram */}
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-                                    <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="2" />
-                                    <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="2" />
-                                    <circle cx="17" cy="7" r="1.2" fill="currentColor" />
-                                </svg>
-                            </a>
-                            <a
-                                href="#"
-                                aria-label="AetherLabs on YouTube"
-                                className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-                            >
-                                {/* YouTube */}
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden>
-                                    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2c.313-1.732.467-3.482.46-5.33a29.005 29.005 0 0 0-.46-5.33z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                    <path d="M9.75 15.02l5.75-3.27-5.75-3.27v6.54z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </a>
-                        </div>
-
-                        {/* Tech note */}
-                        <p className="text-xs text-muted-foreground">
-                            Built with AWS Amplify Gen 2 · Next.js · NFC smart-tags
-                        </p>
-                    </div>
-
-                    {/* Product */}
-                    <div className="space-y-4">
-                        <h4 className="font-medium text-lg text-foreground">Product</h4>
-                        <ul className="space-y-3">
-                            <li><a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">NFC Certificates</a></li>
-                            <li><a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Portfolios</a></li>
-                            <li><a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Collections</a></li>
-                            <li><a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Exhibitions</a></li>
-                            <li><a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a></li>
-                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Updates</a></li>
-                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Roadmap</a></li>
-                        </ul>
-                    </div>
-
-                    {/* Company */}
-                    <div className="space-y-4">
-                        <h4 className="font-medium text-lg text-foreground">Company</h4>
-                        <ul className="space-y-3">
-                            <li><a href="/about" className="text-muted-foreground hover:text-foreground transition-colors">About</a></li>
-                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a></li>
-                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Careers</a></li>
-                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Press</a></li>
-                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a></li>
-                        </ul>
-                    </div>
-
-                    {/* Resources */}
-                    <div className="space-y-4">
-                        <h4 className="font-medium text-lg text-foreground">Resources</h4>
-                        <ul className="space-y-3">
-                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Documentation</a></li>
-                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Help Center</a></li>
-                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Implementation Guides</a></li>
-                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">API Reference</a></li>
-                            <li><a href="/coming-soon" className="text-muted-foreground hover:text-foreground transition-colors">Community</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                {/* Bottom bar */}
-                <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center text-muted-foreground text-sm">
-                    <div>© {year} AetherLabs. All rights reserved.</div>
-                    <div className="flex gap-6 mt-4 md:mt-0">
-                        <a href="/privacy" className="hover:text-foreground transition-colors">Privacy</a>
-                        <a href="/terms" className="hover:text-foreground transition-colors">Terms</a>
-                        <a href="/cookies" className="hover:text-foreground transition-colors">Cookies</a>
+                        <span className="hidden md:inline text-aether-gray/30">·</span>
+                        <span className="font-cormorant text-aether-gray/40">
+                            © {year} AetherLabs
+                        </span>
                     </div>
                 </div>
             </div>

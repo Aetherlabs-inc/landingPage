@@ -20,6 +20,9 @@ const config = {
 		extend: {
 			fontFamily: {
 				inter: ['Inter', 'sans-serif'],
+				playfair: ['Playfair Display', 'serif'],
+				cormorant: ['Cormorant Garamond', 'serif'],
+				libre: ['Libre Baskerville', 'serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -55,6 +58,12 @@ const config = {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// AetherLabs color palette
+				'aether-dark': '#2A2121',
+				'aether-gold': '#BC8010',
+				'aether-terracotta': '#CA5B2B',
+				'aether-gray': '#B0B0B0',
+				// Legacy colors (keeping for backward compatibility)
 				'neon-blue': 'hsl(236, 85%, 66%)',
 				'raisin-black': 'hsl(217, 32%, 8%)',
 				'paynes-gray': 'hsl(216, 9%, 43%)',

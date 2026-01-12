@@ -1,17 +1,11 @@
-'use client'
+"use client";
 
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
-import { ThemeSwitcher, ThemeSwitcherWithLabel } from '@/components/themeSwitcher';
 import Link from 'next/link';
 
 const Header = () => {
-    const router = useRouter();
-    const [activePage, setActivePage] = useState('features');
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -26,16 +20,10 @@ const Header = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const handleJoinWaitlist = () => {
-        router.push('/waitlist');
-    };
-
-    const handleNavClick = (page: string) => (e: React.MouseEvent) => {
-        e.preventDefault();
-        setActivePage(page);
-        const element = document.getElementById(page);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
+    const scrollToWaitlist = () => {
+        const visionSection = document.getElementById('vision');
+        if (visionSection) {
+            visionSection.scrollIntoView({ behavior: 'smooth' });
         }
         setMobileMenuOpen(false);
     };
@@ -44,121 +32,85 @@ const Header = () => {
         setMobileMenuOpen(!mobileMenuOpen);
     };
 
-
     return (
         <header
             className={cn(
-                "sticky top-0 z-50 w-full flex items-center justify-between px-4 py-6 sm:px-6 lg:px-8 transition-all duration-300",
+                "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
                 isScrolled
-                    ? "border-b border-border/40 bg-background/60 backdrop-blur-md"
-                    : "bg-background/40 backdrop-blur-sm"
+                    ? "bg-white/80 backdrop-blur-md border-b border-aether-gray/10"
+                    : "bg-transparent"
             )}
         >
-            <div className="flex w-full max-w-7xl mx-auto items-center justify-between relative">
-                <div className="flex items-center gap-3">
-                    <Link href="/">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16 md:h-20">
+
+                    {/* Logo */}
+                    <Link href="/" className="flex items-center gap-2.5 group">
                         <span
                             aria-label="AetherLabs"
-                            className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-foreground text-background font-semibold tracking-tight"
+                            className={cn(
+                                "inline-flex h-9 w-9 items-center justify-center rounded-lg font-playfair font-medium text-lg transition-all duration-300",
+                                isScrolled
+                                    ? "bg-aether-dark text-white"
+                                    : "bg-aether-dark/90 text-white group-hover:bg-aether-dark"
+                            )}
                         >
                             Æ
                         </span>
-                        <span className="text-lg font-medium tracking-tight text-foreground sm:text-xl"> AetherLabs</span>
-                    </Link>
-                </div>
-
-                {/* Mobile menu button */}
-                <button
-                    className="md:hidden rounded-2xl p-3 text-muted-foreground hover:text-foreground"
-                    onClick={toggleMobileMenu}
-                    aria-label="Toggle navigation"
-                    aria-expanded={mobileMenuOpen}
-                >
-                    {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
-
-                {/* Desktop navigation */}
-                <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center md:flex">
-                    <div className="rounded-full border border-border/60 bg-background/80 px-1 py-1 shadow-lg backdrop-blur-md">
-                        <ToggleGroup type="single" value={activePage} onValueChange={(value) => value && setActivePage(value)}>
-                            <ToggleGroupItem
-                                value="features"
-                                className={cn(
-                                    "px-4 py-2 rounded-full transition-colors relative",
-                                    activePage === 'features' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                                )}
-                                onClick={handleNavClick('features')}
-                            >
-                                Features
-                            </ToggleGroupItem>
-                            <ToggleGroupItem
-                                value="pricing"
-                                className={cn(
-                                    "px-4 py-2 rounded-full transition-colors relative",
-                                    activePage === 'pricing' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                                )}
-                                onClick={handleNavClick('pricing')}
-                            >
-                                Pricing
-                            </ToggleGroupItem>
-                        </ToggleGroup>
-                    </div>
-                </nav>
-
-                {/* Mobile navigation */}
-                {mobileMenuOpen && (
-                    <div className="absolute left-4 right-4 top-full z-50 mt-4 rounded-2xl border border-border/60 bg-background/95 px-6 py-4 shadow-xl backdrop-blur-md md:hidden">
-                        <div className="flex flex-col gap-4">
-                            <a
-                                href="#features"
-                                className={`px-3 py-2 text-sm rounded-md transition-colors ${activePage === 'features' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                                    }`}
-                                onClick={handleNavClick('features')}
-                            >
-                                Features
-                            </a>
-                            <a
-                                href="#pricing"
-                                className={`px-3 py-2 text-sm rounded-md transition-colors ${activePage === 'pricing' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                                    }`}
-                                onClick={handleNavClick('pricing')}
-                            >
-                                Pricing
-                            </a>
-                            <a
-                                href="#"
-                                className="px-3 py-2 text-sm rounded-md transition-colors text-muted-foreground hover:text-foreground hover:bg-muted"
-                            >
-                                FAQ
-                            </a>
-
-                            {/* Add theme toggle for mobile */}
-                            <ThemeSwitcherWithLabel />
-
-                            <Button
-                                onClick={() => {
-                                    handleJoinWaitlist();
-                                    setMobileMenuOpen(false);
-                                }}
-                                className="h-11 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90"
-                            >
-                                Join Waitlist
-                            </Button>
-                        </div>
-                    </div>
-                )}
-
-                <div className="hidden md:flex items-center gap-4">
-                    {/* Theme toggle for desktop */}
-                    <ThemeSwitcher />
-                    <div className="rounded-2xl">
-                        <Button
-                            onClick={handleJoinWaitlist}
-                            className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg hover:shadow-xl"
+                        <span
+                            className={cn(
+                                "font-playfair text-lg tracking-tight transition-all duration-300",
+                                isScrolled
+                                    ? "text-aether-dark"
+                                    : "text-aether-dark/90 group-hover:text-aether-dark"
+                            )}
                         >
-                            Join Waitlist
-                        </Button>
-                    </div>
+                            AetherLabs
+                        </span>
+                    </Link>
+
+                    {/* Desktop CTA */}
+                    <button
+                        onClick={scrollToWaitlist}
+                        className={cn(
+                            "hidden md:inline-flex items-center px-5 py-2 rounded-lg font-libre text-sm transition-all duration-300",
+                            isScrolled
+                                ? "bg-aether-dark text-white hover:bg-aether-gold"
+                                : "bg-aether-dark/90 text-white hover:bg-aether-dark"
+                        )}
+                    >
+                        Join the waitlist
+                    </button>
+
+                    {/* Mobile menu button */}
+                    <button
+                        className="md:hidden p-2 -mr-2 text-aether-dark/70 hover:text-aether-dark transition-colors"
+                        onClick={toggleMobileMenu}
+                        aria-label="Toggle navigation"
+                        aria-expanded={mobileMenuOpen}
+                    >
+                        {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+                    </button>
+                </div>
+            </div>
+
+            {/* Mobile menu */}
+            <div
+                className={cn(
+                    "md:hidden absolute top-full left-0 right-0 transition-all duration-300 overflow-hidden",
+                    mobileMenuOpen
+                        ? "max-h-40 opacity-100"
+                        : "max-h-0 opacity-0"
+                )}
+            >
+                <div className="bg-white/95 backdrop-blur-md border-b border-aether-gray/10 px-6 py-4">
+                    <button
+                        onClick={scrollToWaitlist}
+                        className="w-full py-3 bg-aether-dark text-white font-libre text-sm rounded-lg
+                                 hover:bg-aether-gold transition-colors"
+                    >
+                        Join the waitlist
+                    </button>
                 </div>
             </div>
         </header>

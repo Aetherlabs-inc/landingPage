@@ -7,8 +7,6 @@ import { Button } from '@/components/ui/button';
 
 export default function FinalCTA() {
     const router = useRouter();
-    const waitlistCount = 1247;
-    const spotsRemaining = 5000 - waitlistCount;
     
     const handleJoinWaitlist = () => {
         router.push('/waitlist');
@@ -31,27 +29,23 @@ export default function FinalCTA() {
                         </defs>
                     </svg>
                     <div className="mx-auto max-w-md text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 text-xs font-medium rounded-full bg-white/10 border border-white/20 mb-4">
-                            <span className="flex h-2 w-2 rounded-full bg-white animate-pulse"></span>
-                            Only {spotsRemaining.toLocaleString()} spots remaining
-                        </div>
                         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
                             Ready to protect your art?
                             <br />
                             Start securing your creative legacy today.
                         </h2>
                         <p className="mt-6 text-lg leading-8 text-gray-300">
-                            Join <span className="font-semibold text-white">{waitlistCount.toLocaleString()}+ artists</span> who are securing their artwork with blockchain authentication. Lock in founding member pricing and get early access before we launch.
+                            Be among the first to join and secure your artwork with cryptographically secured digital certificates. Get early access before we launch.
                         </p>
                         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-x-6 gap-y-4 lg:justify-start">
                             <Button
                                 onClick={handleJoinWaitlist}
                                 className="bg-white text-gray-900 hover:bg-gray-100 shadow-lg hover:shadow-xl px-6 py-3 text-base font-semibold"
                             >
-                                Join Waitlist - Secure Your Spot
+                                Join Waitlist - Be Among the First
                             </Button>
                             <div className="text-sm text-white/80">
-                                🔒 Founding member pricing • ⏰ Early access • 🎁 Limited to 5,000 spots
+                                🔒 Early access pricing • ⏰ Early access • 🎁 Coming Soon
                             </div>
                         </div>
                     </div>
