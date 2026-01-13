@@ -74,7 +74,7 @@ const Problem = () => {
             src: '/IMG_6262-2.jpg',
             alt: 'Artwork 1',
             size: 'w-48 h-64 md:w-64 md:h-80',
-            position: { top: '15%', left: '5%' },
+            position: { top: '15%', left: '15%' },
             floatDuration: 6,
             delay: 0.2
         },
