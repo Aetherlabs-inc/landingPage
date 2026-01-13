@@ -5,6 +5,7 @@ import Solution from './Solution/index'
 import Vision from './Vision/index'
 import Pricing from './Pricing'
 import FAQ from './FAQ'
+import WaitlistSection from './WaitlistSection'
 
 const LandingPage = () => {
   return (
@@ -13,6 +14,7 @@ const LandingPage = () => {
       <Problem />
       <Solution />
       <Vision />
+      <WaitlistSection />
       <Pricing />
       <FAQ />
     </div>

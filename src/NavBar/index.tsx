@@ -21,9 +21,9 @@ const Header = () => {
     }, []);
 
     const scrollToWaitlist = () => {
-        const visionSection = document.getElementById('vision');
-        if (visionSection) {
-            visionSection.scrollIntoView({ behavior: 'smooth' });
+        const waitlistSection = document.getElementById('waitlist');
+        if (waitlistSection) {
+            waitlistSection.scrollIntoView({ behavior: 'smooth' });
         }
         setMobileMenuOpen(false);
     };

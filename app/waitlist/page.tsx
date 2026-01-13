@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import Waitlist from '@/src/waitlist';
+import WaitlistSection from '@/src/LandingPage/WaitlistSection';
 
 export default function WaitlistPage() {
-    return <Waitlist />;
+    return <WaitlistSection />;
 }

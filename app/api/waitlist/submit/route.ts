@@ -29,10 +29,9 @@ export async function POST(request: NextRequest) {
             .from('waitlist')
             .select('id, email')
             .eq('email', email)
-            .single();
+            .maybeSingle();
 
-        if (checkError && checkError.code !== 'PGRST116') {
-            // PGRST116 is "not found" which is fine
+        if (checkError) {
             console.error('Error checking existing entry:', checkError);
             return NextResponse.json(
                 { error: 'Failed to check existing entry' },
@@ -42,36 +41,42 @@ export async function POST(request: NextRequest) {
 
         if (existingEntry) {
             return NextResponse.json(
-                { error: 'This email is already on the waitlist', success: true },
+                { 
+                    success: true, 
+                    message: 'This email is already on the waitlist',
+                    alreadyExists: true 
+                },
                 { status: 200 }
             );
         }
 
         // Insert new waitlist entry
-        const { error } = await supabase
+        const { data, error } = await supabase
             .from('waitlist')
             .insert({
                 email: email,
                 name: name || null,
                 role: role || null,
-            });
+            })
+            .select()
+            .single();
 
         if (error) {
             console.error('Error saving waitlist entry:', error);
             return NextResponse.json(
-                { error: 'Failed to save waitlist entry' },
+                { error: error.message || 'Failed to save waitlist entry' },
                 { status: 500 }
             );
         }
 
         return NextResponse.json(
-            { success: true },
+            { success: true, data },
             { status: 200 }
         );
     } catch (error) {
         console.error('Error processing waitlist submission:', error);
         return NextResponse.json(
-            { error: 'Internal server error' },
+            { error: error instanceof Error ? error.message : 'Internal server error' },
             { status: 500 }
         );
     }
