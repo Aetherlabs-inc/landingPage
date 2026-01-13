@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
-import Image from 'next/image'
-import { Heart } from 'lucide-react';
+import Image from 'next/image';
+// import WaitlistSection from '../WaitlistSection';
 
 // Animated element that fades in on scroll
 const FadeInElement = ({
@@ -47,31 +47,6 @@ const FadeInElement = ({
 };
 
 const Vision = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        role: ''
-    });
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-
-        await new Promise(resolve => setTimeout(resolve, 1000));
-
-        console.log('Form submitted:', formData);
-        setIsSubmitted(true);
-        setIsSubmitting(false);
-    };
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        });
-    };
 
     return (
         <section id="vision" className="relative w-full py-24 md:py-32 px-6 md:px-12 overflow-hidden">
@@ -134,30 +109,30 @@ const Vision = () => {
                 {/* GIF Animation Placeholder */}
                 <FadeInElement delay={400} className="mb-16 md:mb-20">
                     <div className="relative w-full max-w-3xl mx-auto">
-                        
-                            {/* =====================================================
+
+                        {/* =====================================================
                             GIF PLACEHOLDER
                             =====================================================
                             Replace the placeholder below with your GIF.
                             
                             Option 1: Using Next.js Image (recommended for optimization) */}
-                            <Image 
-                                src="/aetherlabs-diagram-animated.svg"
-                                alt="AetherLabs connecting Artists, Galleries, Dealers, and Collectors"
-                                width={800}
-                                height={600}
-                                className="w-full h-auto rounded-2xl"
-                                unoptimized={true}  // Required for GIFs
-                            />
-                            
-                            {/* Option 2: Using standard img tag
+                        <Image
+                            src="/aetherlabs-diagram-animated.svg"
+                            alt="AetherLabs connecting Artists, Galleries, Dealers, and Collectors"
+                            width={800}
+                            height={600}
+                            className="w-full h-auto rounded-2xl"
+                            unoptimized={true}  // Required for GIFs
+                        />
+
+                        {/* Option 2: Using standard img tag
                             <img 
                                 src="/path-to-your-animation.gif"
                                 alt="AetherLabs connecting Artists, Galleries, Dealers, and Collectors"
                                 className="w-full h-auto rounded-2xl"
                             />
                             ===================================================== */}
-                       
+
 
                         {/* Placeholder container - remove this when adding your GIF */}
                         {/* <div className="aspect-video bg-gradient-to-br from-aether-gold/10 to-aether-terracotta/10 
@@ -208,134 +183,11 @@ const Vision = () => {
                 </div>
 
                 {/* CTA and Form Section */}
-                <FadeInElement delay={700}>
+                {/* <FadeInElement delay={700}>
                     <div className="max-w-2xl mx-auto">
-                        <div className="bg-white rounded-3xl shadow-xl border border-aether-gray/10 overflow-hidden">
-                            {/* Header */}
-                            <div className="bg-gradient-to-r from-aether-dark to-aether-dark/90 px-8 py-10 text-center">
-                                <p className="font-playfair text-2xl md:text-3xl text-white leading-relaxed font-medium mb-3">
-                                    This is the future we are building.
-                                </p>
-                                <p className="font-cormorant text-xl text-aether-gold">
-                                    We would love you to be part of it.
-                                </p>
-                            </div>
-
-                            {/* Form */}
-                            <div className="px-8 py-10">
-                                {!isSubmitted ? (
-                                    <form onSubmit={handleSubmit} className="space-y-5">
-                                        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                            <div>
-                                                <label
-                                                    htmlFor="name"
-                                                    className="font-libre text-sm text-aether-dark block mb-2"
-                                                >
-                                                    Name
-                                                </label>
-                                                <input
-                                                    type="text"
-                                                    id="name"
-                                                    name="name"
-                                                    value={formData.name}
-                                                    onChange={handleChange}
-                                                    className="w-full px-4 py-3 border border-aether-gray/30 rounded-xl
-                                                             font-cormorant text-lg text-aether-dark
-                                                             focus:outline-none focus:border-aether-gold focus:ring-2 focus:ring-aether-gold/20
-                                                             transition-all bg-white"
-                                                    placeholder="Your name"
-                                                    required
-                                                />
-                                            </div>
-
-                                            <div>
-                                                <label
-                                                    htmlFor="email"
-                                                    className="font-libre text-sm text-aether-dark block mb-2"
-                                                >
-                                                    Email
-                                                </label>
-                                                <input
-                                                    type="email"
-                                                    id="email"
-                                                    name="email"
-                                                    value={formData.email}
-                                                    onChange={handleChange}
-                                                    className="w-full px-4 py-3 border border-aether-gray/30 rounded-xl
-                                                             font-cormorant text-lg text-aether-dark
-                                                             focus:outline-none focus:border-aether-gold focus:ring-2 focus:ring-aether-gold/20
-                                                             transition-all bg-white"
-                                                    placeholder="your@email.com"
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <label
-                                                htmlFor="role"
-                                                className="font-libre text-sm text-aether-dark block mb-2"
-                                            >
-                                                I am a...
-                                            </label>
-                                            <select
-                                                id="role"
-                                                name="role"
-                                                value={formData.role}
-                                                onChange={handleChange}
-                                                className="w-full px-4 py-3 border border-aether-gray/30 rounded-xl
-                                                         font-cormorant text-lg text-aether-dark
-                                                         focus:outline-none focus:border-aether-gold focus:ring-2 focus:ring-aether-gold/20
-                                                         transition-all bg-white cursor-pointer appearance-none"
-                                                required
-                                                style={{
-                                                    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232A2121' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
-                                                    backgroundRepeat: 'no-repeat',
-                                                    backgroundPosition: 'right 16px center'
-                                                }}
-                                            >
-                                                <option value="">Select your role</option>
-                                                <option value="artist">Artist</option>
-                                                <option value="gallery">Gallery</option>
-                                                <option value="dealer">Dealer</option>
-                                                <option value="collector">Collector</option>
-                                                <option value="other">Other</option>
-                                            </select>
-                                        </div>
-
-                                        <button
-                                            type="submit"
-                                            disabled={isSubmitting}
-                                            className="w-full py-4 bg-aether-gold text-white font-libre text-base font-medium
-                                                     rounded-xl hover:bg-aether-dark transition-colors duration-300
-                                                     shadow-lg hover:shadow-xl disabled:opacity-70 disabled:cursor-not-allowed
-                                                     mt-4"
-                                        >
-                                            {isSubmitting ? 'Joining...' : 'Join the waitlist'}
-                                        </button>
-
-                                        <p className="font-cormorant text-sm text-aether-gray text-center mt-4">
-                                            Early access members get priority onboarding and special pricing.
-                                        </p>
-                                    </form>
-                                ) : (
-                                    <div className="text-center py-8">
-                                        <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-aether-gold/20 
-                                                      flex items-center justify-center">
-                                            <Heart className="w-8 h-8 text-aether-gold" />
-                                        </div>
-                                        <p className="font-playfair text-2xl text-aether-dark mb-3">
-                                            Welcome to the future.
-                                        </p>
-                                        <p className="font-cormorant text-xl text-aether-gray">
-                                            We will be in touch shortly.
-                                        </p>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
+                        <WaitlistSection />
                     </div>
-                </FadeInElement>
+                </FadeInElement> */}
             </div>
         </section>
     );

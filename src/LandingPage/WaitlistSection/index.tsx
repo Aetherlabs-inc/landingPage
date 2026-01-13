@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from '@/hooks/use-toast';
 import { Heart } from 'lucide-react';
 
 const WaitlistSection = () => {
@@ -12,7 +12,6 @@ const WaitlistSection = () => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const { toast } = useToast();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         setFormData({
@@ -64,11 +63,19 @@ const WaitlistSection = () => {
                 throw new Error(data.error || 'Failed to join waitlist');
             }
 
+            // Handle success - even if email already exists, treat as success
             setIsSubmitted(true);
-            toast({
-                title: "Welcome to AetherLabs! 🎉",
-                description: "You're on the list. We'll be in touch soon.",
-            });
+            if (data.alreadyExists) {
+                toast({
+                    title: "Already on the list! 🎉",
+                    description: "You're already signed up. We'll be in touch soon.",
+                });
+            } else {
+                toast({
+                    title: "Welcome to AetherLabs! 🎉",
+                    description: "You're on the list. We'll be in touch soon.",
+                });
+            }
 
         } catch (error) {
             console.error('Error submitting waitlist:', error);
@@ -119,6 +126,7 @@ const WaitlistSection = () => {
                                                      focus:outline-none focus:border-aether-gold focus:ring-2 focus:ring-aether-gold/20
                                                      transition-all bg-white"
                                             placeholder="Your name"
+                                            required
                                         />
                                     </div>
 
@@ -127,7 +135,7 @@ const WaitlistSection = () => {
                                             htmlFor="email"
                                             className="font-libre text-sm text-aether-dark block mb-2"
                                         >
-                                            Email <span className="text-aether-terracotta">*</span>
+                                            Email
                                         </label>
                                         <input
                                             type="email"
@@ -141,7 +149,6 @@ const WaitlistSection = () => {
                                                      transition-all bg-white"
                                             placeholder="your@email.com"
                                             required
-                                            disabled={isSubmitting}
                                         />
                                     </div>
                                 </div>
@@ -162,7 +169,7 @@ const WaitlistSection = () => {
                                                  font-cormorant text-lg text-aether-dark
                                                  focus:outline-none focus:border-aether-gold focus:ring-2 focus:ring-aether-gold/20
                                                  transition-all bg-white cursor-pointer appearance-none"
-                                        disabled={isSubmitting}
+                                        required
                                         style={{
                                             backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%232A2121' d='M6 8L1 3h10z'/%3E%3C/svg%3E")`,
                                             backgroundRepeat: 'no-repeat',
@@ -203,7 +210,7 @@ const WaitlistSection = () => {
                                     Welcome to the future.
                                 </p>
                                 <p className="font-cormorant text-xl text-aether-gray">
-                                    We will be in touch soon.
+                                    We will be in touch shortly.
                                 </p>
                             </div>
                         )}
