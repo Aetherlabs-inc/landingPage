@@ -71,15 +71,15 @@ const Problem = () => {
     // Floating art images
     const artImages = [
         {
-            src: '/IMG_6262-2.JPG',
+            src: '/IMG_6262-2.jpg',
             alt: 'Artwork 1',
             size: 'w-48 h-64 md:w-64 md:h-80',
-            position: { top: '15%', left: '5%' },
+            position: { top: '15%', left: '15%' },
             floatDuration: 6,
             delay: 0.2
         },
         {
-            src: '/IMG_8423-2.JPG',
+            src: '/IMG_8423-2.jpg',
             alt: 'Artwork 2',
             size: 'w-40 h-56 md:w-56 md:h-72',
             position: { top: '60%', right: '3%' },
@@ -87,7 +87,7 @@ const Problem = () => {
             delay: 0.5
         },
         {
-            src: '/IMG_8591-2.JPG',
+            src: '/IMG_8591-2.jpg',
             alt: 'Artwork 3',
             size: 'w-44 h-60 md:w-52 md:h-68',
             position: { bottom: '10%', left: '8%' },
