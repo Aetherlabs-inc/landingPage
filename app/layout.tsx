@@ -48,7 +48,7 @@ export const metadata: Metadata = {
         description: 'Premier platform for art authentication with NFC-enabled certificates of authenticity. Protect and verify artwork with cutting-edge technology.',
         images: [
             {
-                url: '/Aether-logo.png',
+                url: '/AetherLabs-logo.png',
                 width: 1200,
                 height: 630,
                 alt: 'AetherLabs - Art Authentication Platform',
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
         description: 'Premier platform for art authentication with NFC-enabled certificates of authenticity.',
         creator: '@AetherLabs',
         site: '@AetherLabs',
-        images: ['/Aether-logo.png'],
+        images: ['/AetherLabs-logo.png'],
     },
     alternates: {
         canonical: 'https://aetherlabs.art',
@@ -69,9 +69,11 @@ export const metadata: Metadata = {
     category: 'art technology',
     classification: 'Art Authentication Platform',
     icons: {
-        icon: '/Aether-logo.png',
-        shortcut: '/Aether-logo.png',
-        apple: '/Aether-logo.png',
+        icon: [
+            { url: '/AetherLabs-logo.png', type: 'image/png' },
+        ],
+        shortcut: '/AetherLabs-logo.png',
+        apple: '/AetherLabs-logo.png',
     },
 };
 
@@ -86,7 +88,6 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
             <head>
                 <link rel="stylesheet" href="https://use.typekit.net/gtt1ipu.css"></link>
-                <link rel="icon" href="/Aether-logo.png" type="image/png" />
             </head>
             <body className="flex flex-col">
                 <main className="">
