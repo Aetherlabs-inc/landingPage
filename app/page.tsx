@@ -32,7 +32,7 @@ export const metadata: Metadata = {
         description: 'Premier platform for art authentication with NFC-enabled certificates of authenticity. Protect and verify artwork with cutting-edge technology.',
         images: [
             {
-                url: '/Aether-logo.png',
+                url: '/AetherLabs-logo.png',
                 width: 1200,
                 height: 630,
                 alt: 'AetherLabs - Art Authentication Platform',
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
         description: 'Premier platform for art authentication with NFC-enabled certificates of authenticity.',
         creator: '@AetherLabs',
         site: '@AetherLabs',
-        images: ['/Aether-logo.png'],
+        images: ['/AetherLabs-logo.png'],
     },
     alternates: {
         canonical: 'https://aetherlabs.art',
